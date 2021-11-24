@@ -7,23 +7,25 @@ package coolbox.model;
 
 /**
  *
- * @author Enzo Carrión
+ * @author alexa
  */
-public class Empleado {
+public class Cliente {
     private int id;
     private String nombre;
     private String apellidos;
+    private String direccion;
     private String dni;
-    private String usuario;
-    private String contrasenia;
+    private String telefono;
+    private String correo;
 
-    public Empleado(int id, String nombre, String apellidos, String dni, String usuario, String contrasenia) {
+    public Cliente(int id, String nombre, String apellidos, String direccion, String dni, String telefono, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.direccion = direccion;
         this.dni = dni;
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
+        this.telefono = telefono;
+        this.correo = correo;
     }
 
     public int getId() {
@@ -50,6 +52,14 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public String getDni() {
         return dni;
     }
@@ -58,20 +68,21 @@ public class Empleado {
         this.dni = dni;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
+    
     
 }
