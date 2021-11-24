@@ -7,6 +7,7 @@ package coolbox.controller;
 
 import coolbox.model.db.Conexion;
 import coolbox.view.FrmLogin;
+import coolbox.view.FrmPanelPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -28,6 +29,20 @@ public class ControllerLogin implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == frmLogin.btnLogin) {
             Conexion.getConexion();
+            if (frmLogin.txtUsuario.getText().equals("admin") && frmLogin.txtContrasenia.getText().equals("admin")){
+                FrmPanelPrincipal frmPanelPrincipal = new FrmPanelPrincipal();
+                ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
+                frmLogin.dispose();
+                frmPanelPrincipal.setVisible(true);
+            } else {
+                FrmPanelPrincipal frmPanelPrincipal = new FrmPanelPrincipal();
+                ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
+                frmLogin.dispose();
+                frmPanelPrincipal.btnProductos.setVisible(false);
+                frmPanelPrincipal.btnEmpleados.setVisible(false);
+                frmPanelPrincipal.btnAsistencia.setVisible(false);
+                frmPanelPrincipal.setVisible(true);
+            }
         }
     }
 

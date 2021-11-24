@@ -11,15 +11,13 @@ package coolbox.model;
  */
 public class Venta {
     private int id;
-    private String empleadoId;
-    private String clienteId;
-    private float total;
+    private Empleado empleado;
+    private Cliente cliente;
 
-    public Venta(int id, String empleadoId, String clienteId, float total) {
+    public Venta(int id, Empleado empleado, Cliente cliente) {
         this.id = id;
-        this.empleadoId = empleadoId;
-        this.clienteId = clienteId;
-        this.total = total;
+        this.empleado = empleado;
+        this.cliente = cliente;
     }
 
     public int getId() {
@@ -30,30 +28,21 @@ public class Venta {
         this.id = id;
     }
 
-    public String getEmpleadoId() {
-        return empleadoId;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoId(String empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
-    public String getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(String clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-
-    public float getTotal() {
-        return total;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
-    }
-    
     
     
 }

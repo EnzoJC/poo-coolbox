@@ -11,17 +11,17 @@ package coolbox.model;
  */
 public class Movimiento {
     private int id;
-    private int empleadoId;
-    private int cajaId;
+    private Empleado empleado;
+    private Caja caja;
     private float monto;
-    private int operacionId;
+    private Operacion operacion;
 
-    public Movimiento(int id, int empleadoId, int cajaId, float monto, int operacionId) {
+    public Movimiento(int id, Empleado empleado, Caja caja, float monto, Operacion operacion) {
         this.id = id;
-        this.empleadoId = empleadoId;
-        this.cajaId = cajaId;
+        this.empleado = empleado;
+        this.caja = caja;
         this.monto = monto;
-        this.operacionId = operacionId;
+        this.operacion = operacion;
     }
 
     public int getId() {
@@ -32,20 +32,20 @@ public class Movimiento {
         this.id = id;
     }
 
-    public int getEmpleadoId() {
-        return empleadoId;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoId(int empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
-    public int getCajaId() {
-        return cajaId;
+    public Caja getCaja() {
+        return caja;
     }
 
-    public void setCajaId(int cajaId) {
-        this.cajaId = cajaId;
+    public void setCaja(Caja caja) {
+        this.caja = caja;
     }
 
     public float getMonto() {
@@ -56,14 +56,13 @@ public class Movimiento {
         this.monto = monto;
     }
 
-    public int getOperacionId() {
-        return operacionId;
+    public Operacion getOperacion() {
+        return operacion;
     }
 
-    public void setOperacionId(int operacionId) {
-        this.operacionId = operacionId;
+    public void setOperacion(Operacion operacion) {
+        this.operacion = operacion;
     }
-    
     
     
 }

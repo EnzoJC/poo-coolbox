@@ -28,7 +28,7 @@ public class Conexion {
             
             Conexion.conexion=DriverManager.getConnection(url,root,pass);
             
-            JOptionPane.showMessageDialog(null, "Conexión Exitosa\n" );
+//            JOptionPane.showMessageDialog(null, "Conexión Exitosa\n" );
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Conexión fallida\n" + ex);
         }

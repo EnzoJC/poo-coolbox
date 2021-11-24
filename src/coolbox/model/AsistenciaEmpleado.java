@@ -14,13 +14,13 @@ import java.util.Date;
  */
 public class AsistenciaEmpleado {
     private int id;
-    private int empleadoId;
+    private Empleado empleado;
     private Timestamp entrada;
     private Timestamp salida;
 
-    public AsistenciaEmpleado(int id, int empleadoId, Timestamp entrada, Timestamp salida) {
+    public AsistenciaEmpleado(int id, Empleado empleado, Timestamp entrada, Timestamp salida) {
         this.id = id;
-        this.empleadoId = empleadoId;
+        this.empleado = empleado;
         this.entrada = entrada;
         this.salida = salida;
     }
@@ -33,12 +33,12 @@ public class AsistenciaEmpleado {
         this.id = id;
     }
 
-    public int getEmpleadoId() {
-        return empleadoId;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoId(int empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleadoId(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public Timestamp getEntrada() {
