@@ -34,42 +34,42 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtCodigoProducto" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel5" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres1" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtCliente" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel6" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="lblSubtotal" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel7" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="lblIgv" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel8" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
-                      <Component id="jLabel9" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="lvlTotal" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel14" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres2" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtImporte" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel15" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
-                      <Component id="jLabel16" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="lvlCambio" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnRealizarVenta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
-                      <Component id="btnGuardar2" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="btnQuitar" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
@@ -91,42 +91,42 @@
                       <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="txtNombres" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="txtCodigoProducto" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="txtNombres1" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="txtCliente" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="lblSubtotal" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="lblIgv" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jLabel9" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="lvlTotal" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="90" pref="90" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel14" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="txtNombres2" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="txtImporte" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel15" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jLabel16" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="lvlCambio" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnGuardar2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRealizarVenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnQuitar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="580" max="-2" attributes="0"/>
@@ -144,7 +144,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tblVentas">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -169,7 +169,7 @@
         <Property name="text" type="java.lang.String" value="C&#xf3;digo de Prod."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres">
+    <Component class="javax.swing.JTextField" name="txtCodigoProducto">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -183,7 +183,7 @@
         <Property name="text" type="java.lang.String" value="Venta"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblSubtotal">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -192,7 +192,7 @@
         <Property name="text" type="java.lang.String" value="S/ 00.00"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres1">
+    <Component class="javax.swing.JTextField" name="txtCliente">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -208,7 +208,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGuardar1">
+    <Component class="javax.swing.JButton" name="btnRealizarVenta">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="ff" red="99" type="rgb"/>
@@ -246,7 +246,7 @@
         <Property name="text" type="java.lang.String" value="IGV"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblIgv">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -263,7 +263,7 @@
         <Property name="text" type="java.lang.String" value="Total"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="lvlTotal">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -280,7 +280,7 @@
         <Property name="text" type="java.lang.String" value="Importe"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres2">
+    <Component class="javax.swing.JTextField" name="txtImporte">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
@@ -296,7 +296,7 @@
         <Property name="text" type="java.lang.String" value="Cambio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
+    <Component class="javax.swing.JLabel" name="lvlCambio">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -305,7 +305,7 @@
         <Property name="text" type="java.lang.String" value="S/ 00.00"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGuardar2">
+    <Component class="javax.swing.JButton" name="btnQuitar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>

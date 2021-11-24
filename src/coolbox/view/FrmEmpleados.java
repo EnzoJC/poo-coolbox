@@ -9,13 +9,15 @@ package coolbox.view;
  *
  * @author Enzo Carrión
  */
-public class FrmGestionEmpleados extends javax.swing.JFrame {
+public class FrmEmpleados extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmGestionEmpleados
      */
-    public FrmGestionEmpleados() {
+    public FrmEmpleados() {
         initComponents();
+        this.setLocationRelativeTo(null);
+	this.setResizable(false);
     }
 
     /**
@@ -28,7 +30,7 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
@@ -46,7 +48,7 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -57,7 +59,7 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleados);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -177,7 +179,7 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEmpleados;
     public javax.swing.JTextField txtApellidos;
     public javax.swing.JTextField txtContrasenia;
     public javax.swing.JTextField txtDni;

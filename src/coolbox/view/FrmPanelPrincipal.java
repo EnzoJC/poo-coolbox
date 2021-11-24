@@ -16,6 +16,8 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
      */
     public FrmPanelPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+	this.setResizable(false);
     }
 
     /**
