@@ -28,7 +28,6 @@ public class ClienteCrud implements ICrud<Cliente>{
             int resultado = ps.executeUpdate();
             
             return resultado > 0;
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en la inserción:\n" + ex);
         } finally {
@@ -41,21 +40,76 @@ public class ClienteCrud implements ICrud<Cliente>{
         return false; 
     }
 
-
-
     @Override
-    public Boolean update(Cliente objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean update(Cliente cliente) {
+        try{
+            ps = Conexion.getConexion().prepareStatement("update clientes set nombres=?, apellidos=?, direccion=?, dni=?, telefono=?, correo=? where id=?");
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellidos());
+            ps.setString(3, cliente.getDireccion());
+            ps.setString(4, cliente.getDni());
+            ps.setString(5, cliente.getTelefono());
+            ps.setString(6, cliente.getCorreo());
+            
+            int resultado = ps.executeUpdate();
+            
+            return resultado > 0; //Ejecucion correcta      
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return false;
     }
 
     @Override
-    public Boolean delete(Cliente id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean delete(Cliente cliente) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("delete from clientes where id=?");
+            ps.setInt(1, cliente.getId());
+
+            int resultado = ps.executeUpdate();
+            
+            return resultado > 0;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return false;
     }
 
     @Override
     public List<Cliente> read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Caja> listaCajas = new ArrayList<>();
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from clientes");
+
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                listaCajas.add(new Caja(rs.getInt("id"), rs.getFloat("monto")));
+            }
+            return listaCajas;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
     }
     
 }

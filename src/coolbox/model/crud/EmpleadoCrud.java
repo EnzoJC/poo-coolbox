@@ -14,7 +14,7 @@ public class EmpleadoCrud implements ICrud<Empleado> {
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-
+    
     @Override
     public Boolean create(Empleado empleado) {
         try {
@@ -53,7 +53,6 @@ public class EmpleadoCrud implements ICrud<Empleado> {
             int resultado = ps.executeUpdate();
             
             return resultado > 0; //Ejecucion correcta
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         } finally {
@@ -111,10 +110,10 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         }
         return null;
     }
-
+    
     Empleado buscar(int id) {
         try {
-            ps = Conexion.getConexion().prepareStatement("select * from empleados where clave=?");
+            ps = Conexion.getConexion().prepareStatement("select * from empleados where id=?");
             ps.setInt(1, id);
 
             rs = ps.executeQuery();
