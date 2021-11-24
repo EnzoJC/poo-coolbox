@@ -77,10 +77,10 @@ public class ControllerProductos implements ActionListener,MouseListener{
             }else{
                 
                 productoCrud.create(producto);
-            }
-            
+            }  
             listaProductos= getListaProductos();
             frmProductos.tblProductos.setModel(poblarTabla());
+            LimpiarDatos();
         }
         
         if(e.getSource() == frmProductos.btnEliminar){
