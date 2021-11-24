@@ -6,6 +6,7 @@
 package coolbox.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -55,6 +56,16 @@ public class AsistenciaEmpleado {
     public void setSalida(Timestamp salida) {
         this.salida = salida;
     }
+    public void marcarEntrada(){
+        Date date = new Date();  
+        Timestamp ts=new Timestamp(date.getTime());  
+        this.entrada = ts;
+    }
     
+    public void marcarSalida(){
+        Date date = new Date();  
+        Timestamp ts=new Timestamp(date.getTime());  
+        this.salida = ts;
+    }
     
 }
