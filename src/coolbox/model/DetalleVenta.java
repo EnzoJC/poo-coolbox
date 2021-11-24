@@ -10,30 +10,31 @@ package coolbox.model;
  * @author alexa
  */
 public class DetalleVenta {
-    private int productoId;
-    private int ventaId;
+    private Producto producto;
+    private Venta venta;
     private int cantidad;
 
-    public DetalleVenta(int productoId, int ventaId, int cantidad) {
-        this.productoId = productoId;
-        this.ventaId = ventaId;
+    public DetalleVenta(Producto producto, Venta venta, int cantidad) {
+        this.producto = producto;
+        this.venta = venta;
         this.cantidad = cantidad;
     }
 
-    public int getProductoId() {
-        return productoId;
+    
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductoId(int productoId) {
-        this.productoId = productoId;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public int getVentaId() {
-        return ventaId;
+    public Venta getVenta() {
+        return venta;
     }
 
-    public void setVentaId(int ventaId) {
-        this.ventaId = ventaId;
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 
     public int getCantidad() {
@@ -43,6 +44,7 @@ public class DetalleVenta {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
     
     
 }

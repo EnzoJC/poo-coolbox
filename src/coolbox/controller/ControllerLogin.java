@@ -38,9 +38,9 @@ public class ControllerLogin implements ActionListener {
                 FrmPanelPrincipal frmPanelPrincipal = new FrmPanelPrincipal();
                 ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
                 frmLogin.dispose();
-                frmPanelPrincipal.btnProductos.setVisible(false);
+                /*frmPanelPrincipal.btnProductos.setVisible(false);
                 frmPanelPrincipal.btnEmpleados.setVisible(false);
-                frmPanelPrincipal.btnAsistencia.setVisible(false);
+                frmPanelPrincipal.btnAsistencia.setVisible(false);*/
                 frmPanelPrincipal.setVisible(true);
             }
         }

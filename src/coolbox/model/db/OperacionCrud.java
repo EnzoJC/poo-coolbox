@@ -5,7 +5,7 @@
  */
 package coolbox.model.db;
 
-import coolbox.model.Empleado;
+import coolbox.model.Operacion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,23 +15,19 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Enzo Carrión
+ * @author alexa
  */
-public class EmpleadoCrud implements ICrud<Empleado> {
+public class OperacionCrud implements ICrud<Operacion>{
+    
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-
+    
     @Override
-    public Boolean create(Empleado empleado) {
-        try {
-            ps = Conexion.getConexion().prepareStatement("insert into empleados (nombres, apellidos, dni, usuario, contrasenia) values (?, ?, ?, ?, ?)");
-            ps.setString(1, empleado.getNombres());
-            ps.setString(2, empleado.getApellidos());
-            ps.setString(3, empleado.getDni());
-            ps.setString(4, empleado.getUsuario());
-            ps.setString(5, empleado.getContrasenia());
-            
+    public Boolean create(Operacion operacion) {
+       try {
+            ps = Conexion.getConexion().prepareStatement("insert into operaciones (nombre) values (?)");
+            ps.setString(1, operacion.getNombre());
             int resultado = ps.executeUpdate();
             
             return resultado > 0;
@@ -49,20 +45,20 @@ public class EmpleadoCrud implements ICrud<Empleado> {
     }
 
 
-
     @Override
-    public Boolean update(Empleado objeto) {
+    public Boolean update(Operacion objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(Empleado id) {
+    public Boolean delete(Operacion id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Empleado> read() {
+    public List<Operacion> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
 }

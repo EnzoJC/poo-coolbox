@@ -5,7 +5,7 @@
  */
 package coolbox.model.db;
 
-import coolbox.model.Empleado;
+import coolbox.model.Caja;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,22 +15,19 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Enzo Carrión
+ * @author alexa
  */
-public class EmpleadoCrud implements ICrud<Empleado> {
+public class CajaCrud implements ICrud<Caja>{
+    
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-
+    
     @Override
-    public Boolean create(Empleado empleado) {
+    public Boolean create(Caja caja) {
         try {
-            ps = Conexion.getConexion().prepareStatement("insert into empleados (nombres, apellidos, dni, usuario, contrasenia) values (?, ?, ?, ?, ?)");
-            ps.setString(1, empleado.getNombres());
-            ps.setString(2, empleado.getApellidos());
-            ps.setString(3, empleado.getDni());
-            ps.setString(4, empleado.getUsuario());
-            ps.setString(5, empleado.getContrasenia());
+            ps = Conexion.getConexion().prepareStatement("insert into caja (monto) values (?)");
+            ps.setFloat(1, caja.getMonto());
             
             int resultado = ps.executeUpdate();
             
@@ -49,20 +46,19 @@ public class EmpleadoCrud implements ICrud<Empleado> {
     }
 
 
-
     @Override
-    public Boolean update(Empleado objeto) {
+    public Boolean update(Caja objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(Empleado id) {
+    public Boolean delete(Caja id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Empleado> read() {
+    public List<Caja> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

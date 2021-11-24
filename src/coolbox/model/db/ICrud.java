@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ICrud<T>{
     public Boolean create(T objeto);
-    public <T> List<T> read();
+    public List<T> read();
     public Boolean update(T objeto);
     public Boolean delete(T id);
 }

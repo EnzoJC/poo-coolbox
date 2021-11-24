@@ -5,7 +5,7 @@
  */
 package coolbox.model.db;
 
-import coolbox.model.Empleado;
+import coolbox.model.AsistenciaEmpleado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,22 +15,20 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Enzo Carrión
+ * @author alexa
  */
-public class EmpleadoCrud implements ICrud<Empleado> {
+public class AsistenciaEmpleadoCrud implements ICrud<AsistenciaEmpleado>{
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-
+    
     @Override
-    public Boolean create(Empleado empleado) {
-        try {
-            ps = Conexion.getConexion().prepareStatement("insert into empleados (nombres, apellidos, dni, usuario, contrasenia) values (?, ?, ?, ?, ?)");
-            ps.setString(1, empleado.getNombres());
-            ps.setString(2, empleado.getApellidos());
-            ps.setString(3, empleado.getDni());
-            ps.setString(4, empleado.getUsuario());
-            ps.setString(5, empleado.getContrasenia());
+    public Boolean create(AsistenciaEmpleado asistenciaEmp) {
+       try {
+            ps = Conexion.getConexion().prepareStatement("insert into asistencia_empleado (empleados_id, entrada, salida) values (?, ?, ?)");
+            ps.setInt(1, asistenciaEmp.getEmpleado().getId());
+            ps.setTimestamp(2, asistenciaEmp.getEntrada());
+            ps.setTimestamp(3, asistenciaEmp.getSalida());
             
             int resultado = ps.executeUpdate();
             
@@ -48,21 +46,21 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return false;
     }
 
-
+  
 
     @Override
-    public Boolean update(Empleado objeto) {
+    public Boolean update(AsistenciaEmpleado objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(Empleado id) {
+    public Boolean delete(AsistenciaEmpleado id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Empleado> read() {
+    public List<AsistenciaEmpleado> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
