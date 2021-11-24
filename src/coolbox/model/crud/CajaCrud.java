@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package coolbox.model.db;
+package coolbox.model.crud;
 
-import coolbox.model.Operacion;
+import coolbox.model.Caja;
+import coolbox.model.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,21 +9,18 @@ import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexa
- */
-public class OperacionCrud implements ICrud<Operacion>{
+public class CajaCrud implements ICrud<Caja>{
     
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
     
     @Override
-    public Boolean create(Operacion operacion) {
-       try {
-            ps = Conexion.getConexion().prepareStatement("insert into operaciones (nombre) values (?)");
-            ps.setString(1, operacion.getNombre());
+    public Boolean create(Caja caja) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("insert into caja (monto) values (?)");
+            ps.setFloat(1, caja.getMonto());
+            
             int resultado = ps.executeUpdate();
             
             return resultado > 0;
@@ -46,19 +39,18 @@ public class OperacionCrud implements ICrud<Operacion>{
 
 
     @Override
-    public Boolean update(Operacion objeto) {
+    public Boolean update(Caja objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(Operacion id) {
+    public Boolean delete(Caja id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Operacion> read() {
+    public List<Caja> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }

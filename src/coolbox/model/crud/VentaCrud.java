@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package coolbox.model.db;
+package coolbox.model.crud;
 
-import coolbox.model.Empleado;
+import coolbox.model.Venta;
+import coolbox.model.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,25 +9,18 @@ import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Enzo Carrión
- */
-public class EmpleadoCrud implements ICrud<Empleado> {
+public class VentaCrud implements ICrud<Venta> {
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
     @Override
-    public Boolean create(Empleado empleado) {
-        try {
-            ps = Conexion.getConexion().prepareStatement("insert into empleados (nombres, apellidos, dni, usuario, contrasenia) values (?, ?, ?, ?, ?)");
-            ps.setString(1, empleado.getNombres());
-            ps.setString(2, empleado.getApellidos());
-            ps.setString(3, empleado.getDni());
-            ps.setString(4, empleado.getUsuario());
-            ps.setString(5, empleado.getContrasenia());
-            
+    public Boolean create(Venta venta) {
+         try {
+            ps = Conexion.getConexion().prepareStatement("insert into ventas (empleados_id,clientes_id,total) values (?,?,?)");
+            ps.setInt(1, venta.getEmpleado().getId());
+            ps.setInt(2, venta.getCliente().getId());
+            ps.setFloat(3, venta.getTotal());
             int resultado = ps.executeUpdate();
             
             return resultado > 0;
@@ -48,21 +37,19 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return false;
     }
 
-
-
     @Override
-    public Boolean update(Empleado objeto) {
+    public Boolean update(Venta objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(Empleado id) {
+    public Boolean delete(Venta id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Empleado> read() {
+    public List<Venta> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

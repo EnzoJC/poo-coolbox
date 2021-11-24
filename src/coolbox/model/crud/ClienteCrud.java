@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package coolbox.model.db;
+package coolbox.model.crud;
 
 import coolbox.model.Cliente;
+import coolbox.model.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +9,6 @@ import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexa
- */
 public class ClienteCrud implements ICrud<Cliente>{
 
     private PreparedStatement ps = null;

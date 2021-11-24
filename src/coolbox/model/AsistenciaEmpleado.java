@@ -25,6 +25,9 @@ public class AsistenciaEmpleado {
         this.salida = salida;
     }
 
+    public AsistenciaEmpleado() {
+    }
+
     public int getId() {
         return id;
     }

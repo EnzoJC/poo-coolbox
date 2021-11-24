@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package coolbox.controller;
 
 import coolbox.model.Producto;
-import coolbox.model.db.ProductoCrud;
+import coolbox.model.crud.ProductoCrud;
 import coolbox.view.FrmProductos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,10 +14,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author alexa
- */
 public class ControllerProductos implements ActionListener,MouseListener{
     FrmProductos frmProductos;
     List<Producto> listaProductos = new ArrayList<>();

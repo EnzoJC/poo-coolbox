@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package coolbox.controller;
 
-import coolbox.model.db.Conexion;
+import coolbox.model.database.Conexion;
 import coolbox.view.FrmLogin;
 import coolbox.view.FrmPanelPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Enzo Carrión
- */
 public class ControllerLogin implements ActionListener {
-
     private FrmLogin frmLogin;
 
     public ControllerLogin(FrmLogin frmLogin) {

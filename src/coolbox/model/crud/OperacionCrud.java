@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package coolbox.model.db;
+package coolbox.model.crud;
 
-import coolbox.model.DetalleVenta;
+import coolbox.model.Operacion;
+import coolbox.model.database.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,23 +9,17 @@ import java.sql.Statement;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author alexa
- */
-public class DetalleVentaCrud implements ICrud<DetalleVenta>{
-
+public class OperacionCrud implements ICrud<Operacion>{
+    
     private PreparedStatement ps = null;
     private Statement stmt = null;
     private ResultSet rs = null;
     
     @Override
-    public Boolean create(DetalleVenta detalleVenta) {
-         try {
-            ps = Conexion.getConexion().prepareStatement("insert into detalle_venta (venta_id, cantidad) values (?, ?)");
-            ps.setInt(1, detalleVenta.getVenta().getId());
-            ps.setInt(2, detalleVenta.getCantidad());
-            
+    public Boolean create(Operacion operacion) {
+       try {
+            ps = Conexion.getConexion().prepareStatement("insert into operaciones (nombre) values (?)");
+            ps.setString(1, operacion.getNombre());
             int resultado = ps.executeUpdate();
             
             return resultado > 0;
@@ -46,19 +36,21 @@ public class DetalleVentaCrud implements ICrud<DetalleVenta>{
         return false;
     }
 
+
     @Override
-    public Boolean update(DetalleVenta objeto) {
+    public Boolean update(Operacion objeto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Boolean delete(DetalleVenta id) {
+    public Boolean delete(Operacion id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<DetalleVenta> read() {
+    public List<Operacion> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

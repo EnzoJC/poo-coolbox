@@ -15,8 +15,8 @@ CREATE TABLE asistencia_empleado
 -- Table: caja
 CREATE TABLE caja
 (
-    id    int NOT NULL AUTO_INCREMENT,
-    monto int NOT NULL,
+    id    int   NOT NULL AUTO_INCREMENT,
+    monto float NOT NULL,
     CONSTRAINT caja_pk PRIMARY KEY (id)
 );
 
@@ -33,13 +33,13 @@ CREATE TABLE clientes
     CONSTRAINT clientes_pk PRIMARY KEY (id)
 );
 
--- Table: detalle_denta
-CREATE TABLE detalle_denta
+-- Table: detalle_venta
+CREATE TABLE detalle_venta
 (
     productos_id int NOT NULL AUTO_INCREMENT,
     venta_id     int NOT NULL,
     cantidad     int NOT NULL,
-    CONSTRAINT detalle_denta_pk PRIMARY KEY (productos_id, venta_id)
+    CONSTRAINT detalle_venta_pk PRIMARY KEY (productos_id, venta_id)
 );
 
 -- Table: empleados
@@ -58,11 +58,11 @@ CREATE TABLE empleados
 -- Table: movimientos
 CREATE TABLE movimientos
 (
-    id             int NOT NULL,
-    empleados_id   int NOT NULL,
-    caja_id        int NOT NULL,
-    monto          int NOT NULL,
-    operaciones_id int NOT NULL,
+    id             int   NOT NULL,
+    empleados_id   int   NOT NULL,
+    caja_id        int   NOT NULL,
+    monto          float NOT NULL,
+    operaciones_id int   NOT NULL,
     CONSTRAINT movimientos_pk PRIMARY KEY (id)
 );
 
@@ -77,21 +77,21 @@ CREATE TABLE operaciones
 -- Table: productos
 CREATE TABLE productos
 (
-    id            int NOT NULL AUTO_INCREMENT,
-    nombre        int NOT NULL,
-    precio_compra int NOT NULL,
-    precio_venta  int NOT NULL,
-    stock         int NOT NULL,
+    id            int         NOT NULL AUTO_INCREMENT,
+    nombre        varchar(50) NOT NULL,
+    precio_compra float       NOT NULL,
+    precio_venta  float       NOT NULL,
+    stock         int         NOT NULL,
     CONSTRAINT productos_pk PRIMARY KEY (id)
 );
 
 -- Table: ventas
 CREATE TABLE ventas
 (
-    id           int NOT NULL AUTO_INCREMENT,
-    empleados_id int NOT NULL,
-    clientes_id  int NOT NULL,
-    total        int NOT NULL,
+    id           int   NOT NULL AUTO_INCREMENT,
+    empleados_id int   NOT NULL,
+    clientes_id  int   NOT NULL,
+    total        float NOT NULL,
     CONSTRAINT ventas_pk PRIMARY KEY (id)
 );
 
@@ -101,14 +101,14 @@ ALTER TABLE asistencia_empleado
     ADD CONSTRAINT asistencia_empleado_empleados FOREIGN KEY asistencia_empleado_empleados (empleados_id)
         REFERENCES empleados (id);
 
--- Reference: detalle_denta_productos (table: detalle_denta)
-ALTER TABLE detalle_denta
-    ADD CONSTRAINT detalle_denta_productos FOREIGN KEY detalle_denta_productos (productos_id)
+-- Reference: detalle_venta_productos (table: detalle_venta)
+ALTER TABLE detalle_venta
+    ADD CONSTRAINT detalle_venta_productos FOREIGN KEY detalle_venta_productos (productos_id)
         REFERENCES productos (id);
 
--- Reference: detalle_denta_venta (table: detalle_denta)
-ALTER TABLE detalle_denta
-    ADD CONSTRAINT detalle_denta_venta FOREIGN KEY detalle_denta_venta (venta_id)
+-- Reference: detalle_venta_venta (table: detalle_venta)
+ALTER TABLE detalle_venta
+    ADD CONSTRAINT detalle_venta_venta FOREIGN KEY detalle_venta_venta (venta_id)
         REFERENCES ventas (id);
 
 -- Reference: movimientos_caja (table: movimientos)
@@ -135,3 +135,6 @@ ALTER TABLE ventas
 ALTER TABLE ventas
     ADD CONSTRAINT venta_empleados FOREIGN KEY venta_empleados (empleados_id)
         REFERENCES empleados (id);
+
+INSERT INTO coolbox_db.empleados (nombres, apellidos, dni, usuario, contrasenia)
+VALUES ('Admin', 'Admin', '87654321', 'admin', 'admin');
