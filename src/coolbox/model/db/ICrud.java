@@ -11,5 +11,5 @@ public interface ICrud<T>{
     public Boolean create(T objeto);
     public List<T> read();
     public Boolean update(T objeto);
-    public Boolean delete(T id);
+    public Boolean delete(T objeto);
 }

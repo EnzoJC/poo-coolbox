@@ -75,12 +75,38 @@ public class ProductoCrud implements ICrud<Producto>{
     }
 
     @Override
-    public Boolean update(Producto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean update(Producto producto) {
+        /*
+        ps = Conexion.getConexion().prepareStatement("insert into productos (nombre,precio_compra,precio_venta,stock) values (?,?,?,?)");
+        ps.setString(1, producto.getNombre());
+        ps.setFloat(2, producto.getPrecioCompra());
+        ps.setFloat(3, producto.getPrecioVenta());
+        ps.setInt(4, producto.getStock());
+        int resultado = ps.executeUpdate();*/
+        return true;
     }
 
     @Override
-    public Boolean delete(Producto id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean delete(Producto producto) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("delete from productos where id=?");
+            ps.setInt(1, producto.getId());
+            int result = ps.executeUpdate();
+            if(result>0){ //Ejecucion correcta
+                return true; 
+            }
+            else{
+                return false;
+            }
+        } catch(Exception ex){
+            System.err.println("Error, "+ex);
+            return false;
+        }finally{
+            try{
+                Conexion.getConexion().close();
+            }catch(Exception ex){
+                System.err.println("Error, "+ex);
+            }
+        }
     }
 }
