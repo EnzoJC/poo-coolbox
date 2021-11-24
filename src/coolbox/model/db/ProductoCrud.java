@@ -76,14 +76,35 @@ public class ProductoCrud implements ICrud<Producto>{
 
     @Override
     public Boolean update(Producto producto) {
-        /*
-        ps = Conexion.getConexion().prepareStatement("insert into productos (nombre,precio_compra,precio_venta,stock) values (?,?,?,?)");
-        ps.setString(1, producto.getNombre());
-        ps.setFloat(2, producto.getPrecioCompra());
-        ps.setFloat(3, producto.getPrecioVenta());
-        ps.setInt(4, producto.getStock());
-        int resultado = ps.executeUpdate();*/
-        return true;
+        
+        try {
+            ps = Conexion.getConexion().prepareStatement("update productos set nombre=?, precio_compra=?,precio_venta=?, stock=? where id=?");
+            ps.setString(1, producto.getNombre());
+            ps.setFloat(2, producto.getPrecioCompra());
+            ps.setFloat(3, producto.getPrecioVenta());
+            ps.setInt(4, producto.getStock());
+            ps.setInt(5, producto.getId());
+            
+            int result = ps.executeUpdate();
+            
+            if(result>0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch(Exception ex){
+            System.err.println("Error, "+ex);
+            return false;
+        }finally{
+            try{
+                Conexion.getConexion().close();
+            }catch(Exception ex){
+                System.err.println("Error, "+ex);
+            }
+        }
+       
+        
     }
 
     @Override
