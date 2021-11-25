@@ -1,7 +1,9 @@
 package coolbox.model.database;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Conexion {
@@ -12,10 +14,13 @@ public class Conexion {
     
     public static Connection getConexion() {
         try{
+            String file = "src/credenciales.txt";
+            Scanner scanner = new Scanner(new File(file));
+            scanner.useDelimiter(";");
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String root= JOptionPane.showInputDialog("Ingresa el usuario de la Base de Datos");
-            String pass= JOptionPane.showInputDialog("Ingresa la contraseña de la Base de Datos");
+            String root= scanner.next();
+            String pass= scanner.next();
             String url="jdbc:mysql://localhost:3306/coolbox_db";
             
             Conexion.conexion=DriverManager.getConnection(url,root,pass);
