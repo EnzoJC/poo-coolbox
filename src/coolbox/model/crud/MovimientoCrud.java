@@ -97,7 +97,8 @@ public class MovimientoCrud implements ICrud<Movimiento>{
                 CajaCrud cajaCrud = new CajaCrud();
                 OperacionCrud operacionCrud = new OperacionCrud();
                 
-                listaMovimientos.add(new Movimiento(rs.getInt("id"), empleadoCrud.buscar(rs.getInt("empleados_id")), cajaCrud.buscar(rs.getInt("caja_id")), rs.getFloat("monto"), operacionCrud.buscar(rs.getInt("operaciones_id"))));
+                listaMovimientos.add(new Movimiento(rs.getInt("id"), empleadoCrud.buscarPorId(rs.getInt("empleados_id")), 
+                cajaCrud.buscarPorId(rs.getInt("caja_id")), rs.getFloat("monto"), operacionCrud.buscarPorId(rs.getInt("operaciones_id"))));
             }
             return listaMovimientos;
 

@@ -38,12 +38,30 @@ public class VentaCrud implements ICrud<Venta> {
     }
 
     @Override
-    public Boolean update(Venta objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean update(Venta venta) {
+        try{
+            ps = Conexion.getConexion().prepareStatement("update ventas set empleados_id=?, clientes_id=?, total=? where id=?");
+            ps.setInt(1, venta.getEmpleado().getId());
+            ps.setInt(2, venta.getCliente().getId());
+            ps.setFloat(3, venta.getTotal());
+            
+            int resultado = ps.executeUpdate();
+            
+            return resultado > 0; //Ejecucion correcta
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return false;
     }
 
     @Override
-    public Boolean delete(Venta id) {
+    public Boolean delete(Venta venta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

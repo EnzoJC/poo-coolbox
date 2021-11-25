@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -89,17 +90,16 @@ public class ClienteCrud implements ICrud<Cliente>{
 
     @Override
     public List<Cliente> read() {
-        List<Caja> listaCajas = new ArrayList<>();
+        List<Cliente> listaClientes = new ArrayList<>();
         try {
             ps = Conexion.getConexion().prepareStatement("select * from clientes");
 
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                listaCajas.add(new Caja(rs.getInt("id"), rs.getFloat("monto")));
+                listaClientes.add(new Cliente(rs.getInt("id"), rs.getString("nombres"),rs.getString("apellidos"), rs.getString("direccion"), rs.getString("dni"),rs.getString("telefono"), rs.getString("correo")));
             }
-            return listaCajas;
-
+            return listaClientes;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         } finally {
@@ -112,4 +112,27 @@ public class ClienteCrud implements ICrud<Cliente>{
         return null;
     }
     
+    Cliente buscarPorDni(int dni){
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from clientes where dni=?");
+            ps.setInt(1, dni);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Cliente(rs.getInt("id"), rs.getString("nombres"), rs.getString("apellidos"), 
+                rs.getString("direccion"), rs.getString("dni"), rs.getString("telefono"), rs.getString("correo"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
+    }
 }

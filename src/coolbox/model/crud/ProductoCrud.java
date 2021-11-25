@@ -40,35 +40,32 @@ public class ProductoCrud implements ICrud<Producto>{
         }
         return false;
     }
-
+    
     @Override
     public List<Producto> read() {
-        List<Producto> productos = new ArrayList<>();
+        List<Producto> listaProductos = new ArrayList<>();
         try {
             ps = Conexion.getConexion().prepareStatement("select * from productos");
             rs= ps.executeQuery();
             
             while(rs.next()){
-                System.out.println("1");
-                Producto producto= new Producto();
-                producto.setId(rs.getInt("id"));
-                producto.setNombre(rs.getString("nombre"));
-                producto.setPrecioCompra(rs.getFloat("precio_compra"));
-                producto.setPrecioVenta(rs.getFloat("precio_venta"));
-                producto.setStock(rs.getInt("stock"));
-                productos.add(producto);
+                listaProductos.add(new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("precio_compra"), rs.getFloat("precio_venta"), rs.getInt("stock")));
             }
-            
+            return listaProductos;
         } catch (SQLException ex) {
-            System.err.println("Error, "+ex);
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
         }
-	
-        return productos;
+        return null;
     }
 
     @Override
     public Boolean update(Producto producto) {
-        
         try {
             ps = Conexion.getConexion().prepareStatement("update productos set nombre=?, precio_compra=?,precio_venta=?, stock=? where id=?");
             ps.setString(1, producto.getNombre());
@@ -79,24 +76,17 @@ public class ProductoCrud implements ICrud<Producto>{
             
             int result = ps.executeUpdate();
             
-            if(result>0){
-                return true;
-            }
-            else{
-                return false;
-            }
-        } catch(Exception ex){
-            System.err.println("Error, "+ex);
-            return false;
+            return result > 0;
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         }finally{
             try{
                 Conexion.getConexion().close();
-            }catch(Exception ex){
-                System.err.println("Error, "+ex);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
             }
         }
-       
-        
+        return false;
     }
 
     @Override
@@ -105,21 +95,39 @@ public class ProductoCrud implements ICrud<Producto>{
             ps = Conexion.getConexion().prepareStatement("delete from productos where id=?");
             ps.setInt(1, producto.getId());
             int result = ps.executeUpdate();
-            if(result>0){ //Ejecucion correcta
-                return true; 
-            }
-            else{
-                return false;
-            }
-        } catch(Exception ex){
-            System.err.println("Error, "+ex);
-            return false;
+            return result > 0; //Ejecucion correcta
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         }finally{
             try{
                 Conexion.getConexion().close();
-            }catch(Exception ex){
-                System.err.println("Error, "+ex);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
             }
         }
+        return false;
+    }
+    
+    Producto buscarPorId(int id){
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from productos where id=?");
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("precio_compra"), rs.getFloat("precio_venta"), rs.getInt("stock"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
     }
 }

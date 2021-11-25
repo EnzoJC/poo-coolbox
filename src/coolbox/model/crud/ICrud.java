@@ -8,8 +8,8 @@ package coolbox.model.crud;
 import java.util.List;
 
 public interface ICrud<T>{
-    public Boolean create(T objeto);
+    public Boolean create(T t);
     public List<T> read();
-    public Boolean update(T objeto);
-    public Boolean delete(T objeto);
+    public Boolean update(T t);
+    public Boolean delete(T t);
 }

@@ -93,7 +93,7 @@ public class AsistenciaEmpleadoCrud implements ICrud<AsistenciaEmpleado> {
 
             while (rs.next()) {
                 EmpleadoCrud empleadoCrud = new EmpleadoCrud();
-                listaAsistenciaEmpleados.add(new AsistenciaEmpleado(rs.getInt("id"), empleadoCrud.buscar(rs.getInt("empleados_id")), rs.getTimestamp("entrada"), rs.getTimestamp("salida")));
+                listaAsistenciaEmpleados.add(new AsistenciaEmpleado(rs.getInt("id"), empleadoCrud.buscarPorId(rs.getInt("empleados_id")), rs.getTimestamp("entrada"), rs.getTimestamp("salida")));
             }
             return listaAsistenciaEmpleados;
 

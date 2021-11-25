@@ -111,7 +111,7 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return null;
     }
     
-    Empleado buscar(int id) {
+    Empleado buscarPorId(int id) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from empleados where id=?");
             ps.setInt(1, id);
@@ -133,5 +133,27 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         }
         return null;
     }
+    
+        Empleado buscarPorDni(int dni) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from empleados where dni=?");
+            ps.setInt(1, dni);
 
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Empleado(rs.getInt("id"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("dni"), rs.getString("usuario"), rs.getString("contrasenia"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
+    }
 }

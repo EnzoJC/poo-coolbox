@@ -91,7 +91,6 @@ public class CajaCrud implements ICrud<Caja>{
                 listaCajas.add(new Caja(rs.getInt("id"), rs.getFloat("monto")));
             }
             return listaCajas;
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         } finally {
@@ -104,7 +103,7 @@ public class CajaCrud implements ICrud<Caja>{
         return null;
     }
     
-    Caja buscar(int id) {
+    Caja buscarPorId(int id) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from caja where id=?");
             ps.setInt(1, id);
