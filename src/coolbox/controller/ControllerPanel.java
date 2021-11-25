@@ -2,6 +2,7 @@
 package coolbox.controller;
 
 import coolbox.model.database.Conexion;
+import coolbox.view.FrmEmpleados;
 import coolbox.view.FrmPanelPrincipal;
 import coolbox.view.FrmProductos;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ public class ControllerPanel implements ActionListener{
     public ControllerPanel(FrmPanelPrincipal frmPanelPrincipal) {
         this.frmPanelPrincipal = frmPanelPrincipal;
         frmPanelPrincipal.btnProductos.addActionListener(this);
+        frmPanelPrincipal.btnEmpleados.addActionListener(this);
     }
 
     @Override
@@ -22,7 +24,13 @@ public class ControllerPanel implements ActionListener{
             ControllerProductos controllerProductos = new ControllerProductos(frmProductos);
             frmProductos.setVisible(true);
         }
+        if(e.getSource() == frmPanelPrincipal.btnEmpleados){
+            FrmEmpleados frmEmpleados= new FrmEmpleados();
+            ControllerEmpleados controllerEmpleados = new ControllerEmpleados(frmEmpleados);
+            frmEmpleados.setVisible(true);
+        }
     }
+    
     
     
 

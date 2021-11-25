@@ -21,8 +21,6 @@ public class Venta {
         this.total = total;
     }
 
-    
-
     public int getId() {
         return id;
     }
