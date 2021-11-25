@@ -108,7 +108,7 @@ public class ProductoCrud implements ICrud<Producto>{
         return false;
     }
     
-    Producto buscarPorId(int id){
+    public Producto buscarPorId(int id){
         try {
             ps = Conexion.getConexion().prepareStatement("select * from productos where id=?");
             ps.setInt(1, id);

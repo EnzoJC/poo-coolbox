@@ -112,10 +112,34 @@ public class ClienteCrud implements ICrud<Cliente>{
         return null;
     }
     
-    Cliente buscarPorDni(int dni){
+    public Cliente buscarPorDni(String dni){
         try {
             ps = Conexion.getConexion().prepareStatement("select * from clientes where dni=?");
-            ps.setInt(1, dni);
+            ps.setString(1, dni);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Cliente(rs.getInt("id"), rs.getString("nombres"), rs.getString("apellidos"), 
+                rs.getString("direccion"), rs.getString("dni"), rs.getString("telefono"), rs.getString("correo"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
+    }
+
+    public Cliente buscarPorId(int id) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from clientes where id=?");
+            ps.setInt(1, id);
 
             rs = ps.executeQuery();
 

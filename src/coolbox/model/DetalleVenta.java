@@ -11,6 +11,9 @@ public class DetalleVenta {
         this.cantidad = cantidad;
     }
 
+    public DetalleVenta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public Producto getProducto() {
         return producto;

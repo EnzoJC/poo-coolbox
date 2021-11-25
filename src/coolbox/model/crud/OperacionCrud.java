@@ -104,7 +104,7 @@ public class OperacionCrud implements ICrud<Operacion>{
         return null;
     }
     
-    Operacion buscarPorId(int id) {
+    public Operacion buscarPorId(int id) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from operaciones where id=?");
             ps.setInt(1, id);

@@ -25,14 +25,14 @@ public class FrmVenta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblSubtotal = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
         btnRealizarVenta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblIgv = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lvlTotal = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtImporte = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -65,8 +65,8 @@ public class FrmVenta extends javax.swing.JFrame {
         lblSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSubtotal.setText("S/ 00.00");
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnGuardar.setText("Atrás");
+        btnAtras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAtras.setText("Atrás");
 
         btnRealizarVenta.setBackground(new java.awt.Color(153, 255, 153));
         btnRealizarVenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -88,9 +88,9 @@ public class FrmVenta extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Total");
 
-        lvlTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lvlTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lvlTotal.setText("S/ 00.00");
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal.setText("S/ 00.00");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel14.setText("Importe");
@@ -116,7 +116,7 @@ public class FrmVenta extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -138,7 +138,7 @@ public class FrmVenta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
-                        .addComponent(lvlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
@@ -162,7 +162,7 @@ public class FrmVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGuardar)
+                            .addComponent(btnAtras)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +183,7 @@ public class FrmVenta extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lvlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +204,7 @@ public class FrmVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnAtras;
     public javax.swing.JButton btnQuitar;
     public javax.swing.JButton btnRealizarVenta;
     private javax.swing.JLabel jLabel1;
@@ -216,11 +216,11 @@ public class FrmVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblIgv;
-    private javax.swing.JLabel lblSubtotal;
-    private javax.swing.JLabel lvlCambio;
-    private javax.swing.JLabel lvlTotal;
-    private javax.swing.JTable tblVentas;
+    public javax.swing.JLabel lblIgv;
+    public javax.swing.JLabel lblSubtotal;
+    public javax.swing.JLabel lblTotal;
+    public javax.swing.JLabel lvlCambio;
+    public javax.swing.JTable tblVentas;
     public javax.swing.JTextField txtCliente;
     public javax.swing.JTextField txtCodigoProducto;
     public javax.swing.JTextField txtImporte;

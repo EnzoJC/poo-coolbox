@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -62,12 +63,50 @@ public class VentaCrud implements ICrud<Venta> {
 
     @Override
     public Boolean delete(Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ps = Conexion.getConexion().prepareStatement("delete from ventas where id=?");
+            ps.setInt(1, venta.getId());
+            int result = ps.executeUpdate();
+            return result > 0; //Ejecucion correcta
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        }finally{
+            try{
+                Conexion.getConexion().close();
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return false;
     }
 
     @Override
     public List<Venta> read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Venta> listaVentas = new ArrayList<>();
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from ventas");
+            rs= ps.executeQuery();
+            
+            while(rs.next()){
+                EmpleadoCrud empleadoCrud = new EmpleadoCrud();
+                ClienteCrud clienteCrud = new ClienteCrud();
+                listaVentas.add(new Venta(rs.getInt("id"), empleadoCrud.buscarPorId(rs.getInt("empleados_id")), clienteCrud.buscarPorId(rs.getInt("clientes_id")), rs.getFloat("total")));
+            }
+            return listaVentas;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
+    }
+    
+    public int ulitmoId(){
+        return read().get(read().size() - 1).getId();
     }
     
 }

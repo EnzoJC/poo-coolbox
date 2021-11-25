@@ -103,7 +103,7 @@ public class CajaCrud implements ICrud<Caja>{
         return null;
     }
     
-    Caja buscarPorId(int id) {
+    public Caja buscarPorId(int id) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from caja where id=?");
             ps.setInt(1, id);
