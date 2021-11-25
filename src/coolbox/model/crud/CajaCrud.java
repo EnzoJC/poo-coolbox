@@ -20,6 +20,7 @@ public class CajaCrud implements ICrud<Caja>{
         try {
             ps = Conexion.getConexion().prepareStatement("insert into caja (monto) values (?)");
             ps.setFloat(1, caja.getMonto());
+            ps.setInt(2, caja.getId());
             
             int resultado = ps.executeUpdate();
             
@@ -42,7 +43,7 @@ public class CajaCrud implements ICrud<Caja>{
         try{
             ps = Conexion.getConexion().prepareStatement("update caja set monto=? where id=?");
             ps.setFloat(1, caja.getMonto());
-            
+            ps.setInt(2, caja.getId());
             int resultado = ps.executeUpdate();
             
             return resultado > 0; //Ejecucion correcta      

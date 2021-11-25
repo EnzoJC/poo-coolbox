@@ -4,6 +4,7 @@ package coolbox.controller;
 import coolbox.model.Empleado;
 import coolbox.model.database.Conexion;
 import coolbox.view.FrmAsistencia;
+import coolbox.view.FrmCaja;
 import coolbox.view.FrmEmpleados;
 import coolbox.view.FrmPanelPrincipal;
 import coolbox.view.FrmProductos;
@@ -21,6 +22,7 @@ public class ControllerPanel implements ActionListener{
         frmPanelPrincipal.btnEmpleados.addActionListener(this);
         frmPanelPrincipal.btnVenta.addActionListener(this);
         frmPanelPrincipal.btnAsistencia.addActionListener(this);
+        frmPanelPrincipal.btnCaja.addActionListener(this);
     }
 
     @Override
@@ -44,6 +46,11 @@ public class ControllerPanel implements ActionListener{
             FrmAsistencia frmAsistencia = new FrmAsistencia();
             ControllerAsistencia controllerAsistencia = new ControllerAsistencia(frmAsistencia, empleado);
             frmAsistencia.setVisible(true);
+        }
+        if(e.getSource() == frmPanelPrincipal.btnCaja){
+            FrmCaja frmCaja= new FrmCaja();
+            ControllerCaja controllerCaja = new ControllerCaja(frmCaja);
+            frmCaja.setVisible(true);
         }
     }
     

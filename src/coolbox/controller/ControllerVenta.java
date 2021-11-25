@@ -5,14 +5,19 @@
  */
 package coolbox.controller;
 
+import coolbox.model.Caja;
 import coolbox.model.Cliente;
 import coolbox.model.DetalleVenta;
 import coolbox.model.Empleado;
+import coolbox.model.Movimiento;
 import coolbox.model.Producto;
 import coolbox.model.Venta;
+import coolbox.model.crud.CajaCrud;
 import coolbox.model.crud.ClienteCrud;
 import coolbox.model.crud.DetalleVentaCrud;
 import coolbox.model.crud.EmpleadoCrud;
+import coolbox.model.crud.MovimientoCrud;
+import coolbox.model.crud.OperacionCrud;
 import coolbox.model.crud.ProductoCrud;
 import coolbox.model.crud.VentaCrud;
 import coolbox.view.FrmPanelPrincipal;
@@ -42,6 +47,10 @@ public class ControllerVenta implements ActionListener, KeyListener {
     private ClienteCrud clienteCrud = new ClienteCrud();
     private DetalleVentaCrud detalleVentaCrud = new DetalleVentaCrud();
     private VentaCrud ventaCrud = new VentaCrud();
+    private MovimientoCrud movimientoCrud= new MovimientoCrud();
+    private CajaCrud cajaCrud= new CajaCrud();
+    private OperacionCrud operacionCrud= new OperacionCrud();
+    
     private Empleado empleado;
     private List<DetalleVenta> listaDetalleVenta = new ArrayList<>();
     DecimalFormat df = new DecimalFormat("###.##");
@@ -87,10 +96,24 @@ public class ControllerVenta implements ActionListener, KeyListener {
             
             for (DetalleVenta detalleVenta : listaDetalleVenta) {
                 detalleVenta.setVenta(venta);
+                detalleVenta.getProducto().setStock( detalleVenta.getProducto().getStock()- detalleVenta.getCantidad());
+                productoCrud.update(detalleVenta.getProducto());
                 detalleVentaCrud.create(detalleVenta);
             }
             JOptionPane.showMessageDialog(frmVenta, "Venta Exitosa");
             // TODO limpiar los campos y la tabla
+            Movimiento movimiento;
+            if(obtenerTotal()>0){
+                movimiento= new Movimiento(0, empleado, cajaCrud.buscarPorId(1), obtenerTotal(),operacionCrud.buscarPorId(1));
+            }else{
+                movimiento= new Movimiento(0, empleado, cajaCrud.buscarPorId(1), obtenerTotal(),operacionCrud.buscarPorId(2));
+            }
+            movimientoCrud.create(movimiento);
+            Caja caja=cajaCrud.buscarPorId(1);
+            caja.setMonto(caja.getMonto()+movimiento.getMonto());
+            System.out.println("monto "+caja.getMonto());
+            cajaCrud.update(caja);
+            
         }
     }
     
@@ -105,18 +128,20 @@ public class ControllerVenta implements ActionListener, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == frmVenta.txtImporte){
-            if ((e.getKeyChar() < '0' || e.getKeyChar() > '9')&& e.getKeyChar()!=java.awt.event.KeyEvent.VK_ENTER) {
-		e.consume();
-	    }
-            if(e.getKeyChar()==java.awt.event.KeyEvent.VK_ENTER){
-                System.out.println(obtenerTotal());
-                System.out.println(frmVenta.txtImporte.getText());
-                System.out.println(Float.parseFloat(frmVenta.txtImporte.getText())+"");
-                float vuelto = (Float.parseFloat(frmVenta.txtImporte.getText()) - obtenerTotal());
-                if (vuelto >= 0) {
-                    frmVenta.lvlCambio.setText("S/ " + vuelto);
-                }else{
-                    frmVenta.lvlCambio.setText("El monto no es suficiente");
+            if (e.getSource() == frmVenta.txtImporte){
+                if ((e.getKeyChar() < '0' || e.getKeyChar() > '9')&& e.getKeyChar()!=java.awt.event.KeyEvent.VK_ENTER) {
+                    e.consume();
+                }
+                if(e.getKeyChar()==java.awt.event.KeyEvent.VK_ENTER){
+                    System.out.println(obtenerTotal());
+                    System.out.println(frmVenta.txtImporte.getText());
+                    System.out.println(Float.parseFloat(frmVenta.txtImporte.getText())+"");
+                    float vuelto = (Float.parseFloat(frmVenta.txtImporte.getText()) - obtenerTotal());
+                    if (vuelto >= 0) {
+                        frmVenta.lvlCambio.setText("S/ " + vuelto);
+                    }else{
+                        frmVenta.lvlCambio.setText("El monto no es suficiente");
+                    }
                 }
             }
         }
@@ -133,17 +158,32 @@ public class ControllerVenta implements ActionListener, KeyListener {
                 }
                 else{
                     int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad"));
-                    DetalleVenta detalleVenta = new DetalleVenta();
-                    detalleVenta.setCantidad(cantidad);
-                    detalleVenta.setProducto(producto);
-                    listaDetalleVenta.add(detalleVenta);
-                    frmVenta.tblVentas.setModel(poblarTabla());
-                    float subtotal=  roundFloat((obtenerTotal()*0.82f), 2);
-                    float igv=roundFloat((obtenerTotal()*0.18f), 2);
-                    frmVenta.lblSubtotal.setText("S/ " + subtotal);
-                    frmVenta.lblIgv.setText("S/ " + igv);
-                    frmVenta.lblTotal.setText("S/ " + roundFloat(obtenerTotal(), 2));
-                   
+                    if(cantidad< producto.getStock()){           
+                        boolean flag=false;
+                        for(DetalleVenta dv: listaDetalleVenta){
+                            if(dv.getProducto().getId()== producto.getId()){
+                                dv.setCantidad(dv.getCantidad()+ cantidad);
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        if(!flag){
+                            DetalleVenta detalleVenta = new DetalleVenta();
+                            detalleVenta.setCantidad(cantidad);
+                            detalleVenta.setProducto(producto);                
+                            listaDetalleVenta.add(detalleVenta);
+                        }
+
+                        frmVenta.tblVentas.setModel(poblarTabla());
+                        float subtotal=  roundFloat((obtenerTotal()*0.82f), 2);
+                        float igv=roundFloat((obtenerTotal()*0.18f), 2);
+                        frmVenta.lblSubtotal.setText("S/ " + subtotal);
+                        frmVenta.lblIgv.setText("S/ " + igv);
+                        frmVenta.lblTotal.setText("S/ " + roundFloat(obtenerTotal(), 2));
+                    }else{
+                        JOptionPane.showMessageDialog(frmVenta, "No Hay suficiente Stock del Producto Solicitado");
+                    }
                 }
             }
         }
