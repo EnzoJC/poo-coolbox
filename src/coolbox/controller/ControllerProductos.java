@@ -82,6 +82,9 @@ public class ControllerProductos implements ActionListener,MouseListener{
             frmProductos.tblProductos.setModel(poblarTabla());
             LimpiarDatos();
         }
+         if(e.getSource() == frmProductos.btnLimpiar){
+             LimpiarDatos();
+         }
     }
 
     @Override
