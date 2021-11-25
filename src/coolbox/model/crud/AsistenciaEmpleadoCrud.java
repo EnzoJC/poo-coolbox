@@ -18,10 +18,10 @@ public class AsistenciaEmpleadoCrud implements ICrud<AsistenciaEmpleado> {
     @Override
     public Boolean create(AsistenciaEmpleado asistenciaEmp) {
         try {
-            ps = Conexion.getConexion().prepareStatement("insert into asistencia_empleado (empleados_id, entrada, salida) values (?, ?, ?)");
-            ps.setInt(1, asistenciaEmp.getEmpleado().getId());
-            ps.setTimestamp(2, asistenciaEmp.getEntrada());
-            ps.setTimestamp(3, asistenciaEmp.getSalida());
+            ps = Conexion.getConexion().prepareStatement("insert into asistencia_empleado (id, empleados_id, entrada) values (?, ?, ?)");
+            ps.setInt(1, asistenciaEmp.getId());
+            ps.setInt(2, asistenciaEmp.getEmpleado().getId());
+            ps.setTimestamp(3, asistenciaEmp.getEntrada());
 
             int resultado = ps.executeUpdate();
 
@@ -45,11 +45,11 @@ public class AsistenciaEmpleadoCrud implements ICrud<AsistenciaEmpleado> {
             ps.setInt(1, asistenciaEmpleado.getEmpleado().getId());
             ps.setTimestamp(2, asistenciaEmpleado.getEntrada());
             ps.setTimestamp(3, asistenciaEmpleado.getSalida());
+            ps.setInt(4, asistenciaEmpleado.getId());
             
             int resultado = ps.executeUpdate();
             
             return resultado > 0; //Ejecucion correcta
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         } finally {
@@ -107,5 +107,12 @@ public class AsistenciaEmpleadoCrud implements ICrud<AsistenciaEmpleado> {
             }
         }
         return null;
+    }
+    
+    public int ulitmoId(){
+        if(read().size()==0){
+            return 0;
+        }
+        return read().get(read().size()-1).getId();
     }
 }

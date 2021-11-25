@@ -31,7 +31,7 @@ public class AsistenciaEmpleado {
         return empleado;
     }
 
-    public void setEmpleadoId(Empleado empleado) {
+    public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
 

@@ -177,7 +177,7 @@ public class ControllerVenta implements ActionListener, KeyListener {
         JDialog jDialog = new JDialog(this.frmVenta, true);
         PanelCliente panelCliente = new PanelCliente();
         jDialog.add(panelCliente);
-        jDialog.setSize(500, 900);
+        jDialog.setSize(460, 530); // [430, 500]
         jDialog.setResizable(false);
         jDialog.setLocationRelativeTo(null);
         ControllerCliente controllerCliente= new ControllerCliente(panelCliente, dni);

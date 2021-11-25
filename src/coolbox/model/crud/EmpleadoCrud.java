@@ -135,10 +135,10 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return null;
     }
     
-    public Empleado buscarPorDni(int dni) {
+    public Empleado buscarPorDni(String dni) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from empleados where dni=?");
-            ps.setInt(1, dni);
+            ps.setString(1, dni);
 
             rs = ps.executeQuery();
 
