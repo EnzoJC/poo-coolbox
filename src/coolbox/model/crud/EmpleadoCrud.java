@@ -49,6 +49,7 @@ public class EmpleadoCrud implements ICrud<Empleado> {
             ps.setString(3, empleado.getDni());
             ps.setString(4, empleado.getUsuario());
             ps.setString(5, empleado.getContrasenia());
+            ps.setInt(6, empleado.getId());
             
             int resultado = ps.executeUpdate();
             
@@ -111,7 +112,7 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return null;
     }
     
-    Empleado buscarPorId(int id) {
+    public Empleado buscarPorId(int id) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from empleados where id=?");
             ps.setInt(1, id);
@@ -134,7 +135,7 @@ public class EmpleadoCrud implements ICrud<Empleado> {
         return null;
     }
     
-        Empleado buscarPorDni(int dni) {
+    public Empleado buscarPorDni(int dni) {
         try {
             ps = Conexion.getConexion().prepareStatement("select * from empleados where dni=?");
             ps.setInt(1, dni);
