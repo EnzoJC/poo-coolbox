@@ -7,8 +7,8 @@ CREATE TABLE asistencia_empleado
 (
     id           int       NOT NULL AUTO_INCREMENT,
     empleados_id int       NOT NULL,
-    entrada      timestamp NOT NULL,
-    salida       timestamp NOT NULL,
+    entrada      timestamp NULL,
+    salida       timestamp NULL,
     CONSTRAINT asistencia_empleado_pk PRIMARY KEY (id)
 );
 
