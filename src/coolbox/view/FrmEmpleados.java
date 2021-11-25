@@ -35,9 +35,9 @@ public class FrmEmpleados extends javax.swing.JFrame {
         txtContrasenia = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,8 +74,8 @@ public class FrmEmpleados extends javax.swing.JFrame {
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnGuardar.setText("Guardar");
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnEditar.setText("Editar");
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLimpiar.setText("Limpiar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +110,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
@@ -147,7 +147,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
                         .addGap(232, 232, 232)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnGuardar)
-                            .addComponent(btnEditar)
+                            .addComponent(btnLimpiar)
                             .addComponent(btnEliminar)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -157,9 +157,9 @@ public class FrmEmpleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -167,7 +167,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEmpleados;
+    public javax.swing.JTable tblEmpleados;
     public javax.swing.JTextField txtApellidos;
     public javax.swing.JTextField txtContrasenia;
     public javax.swing.JTextField txtDni;
