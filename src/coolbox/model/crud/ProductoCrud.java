@@ -109,16 +109,19 @@ public class ProductoCrud implements ICrud<Producto>{
     }
     
     public Producto buscarPorId(int id){
+        System.out.println("id "+id);
         try {
             ps = Conexion.getConexion().prepareStatement("select * from productos where id=?");
+            
             ps.setInt(1, id);
-
+            
             rs = ps.executeQuery();
 
             if (rs.next()) {
+                System.out.println("1sda");
                 return new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("precio_compra"), rs.getFloat("precio_venta"), rs.getInt("stock"));
             }
-            return null;
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:\n" + ex);
         } finally {

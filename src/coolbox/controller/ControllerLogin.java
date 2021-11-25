@@ -1,5 +1,6 @@
 package coolbox.controller;
 
+import coolbox.model.crud.EmpleadoCrud;
 import coolbox.model.database.Conexion;
 import coolbox.view.FrmLogin;
 import coolbox.view.FrmPanelPrincipal;
@@ -21,12 +22,13 @@ public class ControllerLogin implements ActionListener {
             Conexion.getConexion();
             if (frmLogin.txtUsuario.getText().equals("admin") && frmLogin.txtContrasenia.getText().equals("admin")){
                 FrmPanelPrincipal frmPanelPrincipal = new FrmPanelPrincipal();
-                ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
+                EmpleadoCrud empleadoCrud = new EmpleadoCrud();
+                ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal,empleadoCrud.buscarPorId(1));
                 frmLogin.dispose();
                 frmPanelPrincipal.setVisible(true);
             } else {
                 FrmPanelPrincipal frmPanelPrincipal = new FrmPanelPrincipal();
-                ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
+               // ControllerPanel controllerPanel = new ControllerPanel(frmPanelPrincipal);
                 frmLogin.dispose();
                 /*frmPanelPrincipal.btnProductos.setVisible(false);
                 frmPanelPrincipal.btnEmpleados.setVisible(false);

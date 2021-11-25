@@ -106,7 +106,10 @@ public class VentaCrud implements ICrud<Venta> {
     }
     
     public int ulitmoId(){
-        return read().get(read().size() - 1).getId();
+        if(read().size()==0){
+            return 0;
+        }
+        return read().get(read().size()-1).getId();
     }
     
 }

@@ -23,37 +23,37 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel5" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres1" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtNombres" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel6" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres2" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtApellidos" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel7" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres3" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel8" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres4" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtDni" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel9" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres5" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel10" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="txtNombres6" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="txtCorreo" min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="btnGuardar" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="btnAgregar" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
-                      <Component id="btnGuardar1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -68,37 +68,37 @@
               <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel5" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres1" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtNombres" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel6" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres2" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtApellidos" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel7" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtDireccion" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel8" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres4" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtDni" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel9" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres5" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtTelefono" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel10" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtNombres6" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="txtCorreo" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="82" pref="82" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnGuardar1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
@@ -106,7 +106,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtNombres1">
+    <Component class="javax.swing.JTextField" name="txtNombres">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -128,7 +128,7 @@
         <Property name="text" type="java.lang.String" value="Agregar cliente"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres2">
+    <Component class="javax.swing.JTextField" name="txtApellidos">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -141,7 +141,7 @@
         <Property name="text" type="java.lang.String" value="Apellidos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres3">
+    <Component class="javax.swing.JTextField" name="txtDireccion">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -154,7 +154,7 @@
         <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres4">
+    <Component class="javax.swing.JTextField" name="txtDni">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -167,7 +167,7 @@
         <Property name="text" type="java.lang.String" value="DNI"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres5">
+    <Component class="javax.swing.JTextField" name="txtTelefono">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -180,7 +180,7 @@
         <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombres6">
+    <Component class="javax.swing.JTextField" name="txtCorreo">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -193,7 +193,7 @@
         <Property name="text" type="java.lang.String" value="Correo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGuardar">
+    <Component class="javax.swing.JButton" name="btnAgregar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="ff" red="99" type="rgb"/>
@@ -207,7 +207,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGuardar1">
+    <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
