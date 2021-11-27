@@ -27,8 +27,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -42,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Enzo Carrión
  */
-public class ControllerVenta implements ActionListener, KeyListener, MouseListener{
+public class ControllerVenta implements ActionListener, KeyListener {
     private FrmVenta frmVenta;
     private ProductoCrud productoCrud = new ProductoCrud();
     private EmpleadoCrud empleadoCrud = new EmpleadoCrud();
@@ -51,10 +49,10 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
     private VentaCrud ventaCrud = new VentaCrud();
     private MovimientoCrud movimientoCrud= new MovimientoCrud();
     private CajaCrud cajaCrud= new CajaCrud();
-    private OperacionCrud operacionCrud= new OperacionCrud();   
+    private OperacionCrud operacionCrud= new OperacionCrud();
+    
     private Empleado empleado;
     private List<DetalleVenta> listaDetalleVenta = new ArrayList<>();
-    private int idSeleccionado=0;
     DecimalFormat df = new DecimalFormat("###.##");
 
     public ControllerVenta(FrmVenta frmVenta, Empleado empleado) {
@@ -66,7 +64,6 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
         this.frmVenta.txtCodigoProducto.addKeyListener(this);
         this.frmVenta.txtCliente.addKeyListener(this);
         this.frmVenta.txtImporte.addKeyListener(this);
-        this.frmVenta.tblVentas.addMouseListener(this);
     }
     
     private DefaultTableModel poblarTabla() {
@@ -116,25 +113,7 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
             caja.setMonto(caja.getMonto()+movimiento.getMonto());
             System.out.println("monto "+caja.getMonto());
             cajaCrud.update(caja);
-            limpiarDatos();
             
-        }
-        if (e.getSource() == frmVenta.btnQuitar){  
-            for(int i=0;i<listaDetalleVenta.size();i++){      
-                if(listaDetalleVenta.get(i).getProducto().getId()== idSeleccionado){
-                    listaDetalleVenta.remove(i);
-                    break;
-                }
-            }
-            frmVenta.tblVentas.setModel(poblarTabla());
-            float subtotal=  roundFloat((obtenerTotal()*0.82f), 2);
-            float igv=roundFloat((obtenerTotal()*0.18f), 2);
-            frmVenta.lblSubtotal.setText("S/ " + subtotal);
-            frmVenta.lblIgv.setText("S/ " + igv);
-            frmVenta.lblTotal.setText("S/ " + roundFloat(obtenerTotal(), 2));
-        }
-        if (e.getSource() == frmVenta.btnAtras){  
-            this.frmVenta.dispose();       
         }
     }
     
@@ -154,7 +133,9 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
                     e.consume();
                 }
                 if(e.getKeyChar()==java.awt.event.KeyEvent.VK_ENTER){
-                   
+                    System.out.println(obtenerTotal());
+                    System.out.println(frmVenta.txtImporte.getText());
+                    System.out.println(Float.parseFloat(frmVenta.txtImporte.getText())+"");
                     float vuelto = (Float.parseFloat(frmVenta.txtImporte.getText()) - obtenerTotal());
                     if (vuelto >= 0) {
                         frmVenta.lvlCambio.setText("S/ " + vuelto);
@@ -170,13 +151,14 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
     public void keyPressed(KeyEvent e) {
         if (e.getSource() == frmVenta.txtCodigoProducto) {
             if (e.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
-                Producto producto = productoCrud.buscarPorId(Integer.parseInt(frmVenta.txtCodigoProducto.getText()));         
+                Producto producto = productoCrud.buscarPorId(Integer.parseInt(frmVenta.txtCodigoProducto.getText()));
+               
                 if (producto == null){
                      JOptionPane.showMessageDialog(null, "El producto no existe");
                 }
                 else{
                     int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad"));
-                    if(cantidad<= producto.getStock()){           
+                    if(cantidad< producto.getStock()){           
                         boolean flag=false;
                         for(DetalleVenta dv: listaDetalleVenta){
                             if(dv.getProducto().getId()== producto.getId()){
@@ -189,7 +171,7 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
                         if(!flag){
                             DetalleVenta detalleVenta = new DetalleVenta();
                             detalleVenta.setCantidad(cantidad);
-                            detalleVenta.setProducto(producto);
+                            detalleVenta.setProducto(producto);                
                             listaDetalleVenta.add(detalleVenta);
                         }
 
@@ -199,7 +181,6 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
                         frmVenta.lblSubtotal.setText("S/ " + subtotal);
                         frmVenta.lblIgv.setText("S/ " + igv);
                         frmVenta.lblTotal.setText("S/ " + roundFloat(obtenerTotal(), 2));
-                        frmVenta.txtCodigoProducto.setText("");
                     }else{
                         JOptionPane.showMessageDialog(frmVenta, "No Hay suficiente Stock del Producto Solicitado");
                     }
@@ -210,7 +191,10 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
             if (e.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER){
                 Cliente cliente = clienteCrud.buscarPorDni(frmVenta.txtCliente.getText());
                 if (cliente == null) {
-                    registrarProveedor(frmVenta.txtCliente.getText());                 
+                    // Lanzar panel de registro de cliente
+                    registrarProveedor(frmVenta.txtCliente.getText());
+                    
+                    // despues de registrar tambien se bloquea el txt
                     frmVenta.txtCliente.setEnabled(false);
                 } else {
                     frmVenta.txtCliente.setEnabled(false);
@@ -220,16 +204,14 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
     }
     
     private void limpiarDatos(){
-        frmVenta.txtCliente.setText("");
-        frmVenta.txtCliente.setEnabled(true);
-        frmVenta.txtCodigoProducto.setText("");
-        frmVenta.txtImporte.setText("");
         frmVenta.lblSubtotal.setText("S/ " + (obtenerTotal() * 0.82));
         frmVenta.lblIgv.setText("S/ " + (obtenerTotal() * 0.18));
         frmVenta.lblTotal.setText("S/ " + obtenerTotal());
+        frmVenta.txtCliente.setText("");
+        frmVenta.txtCodigoProducto.setText("");
+        frmVenta.txtImporte.setText("");
         frmVenta.lvlCambio.setText("S/ 00.00");
-        listaDetalleVenta= new ArrayList<>();
-        frmVenta.tblVentas.setModel(poblarTabla());
+        
     }
     public void registrarProveedor(String dni) {
         JDialog jDialog = new JDialog(this.frmVenta, true);
@@ -250,37 +232,5 @@ public class ControllerVenta implements ActionListener, KeyListener, MouseListen
         BigDecimal bigDecimal = new BigDecimal(Float.toString(f));
         bigDecimal = bigDecimal.setScale(places, RoundingMode.HALF_UP);
         return bigDecimal.floatValue();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        
-         if(e.getSource() == frmVenta.tblVentas){
-            idSeleccionado= Integer.parseInt((String) frmVenta.tblVentas.getValueAt( frmVenta.tblVentas.getSelectedRow(), 0));
-             System.out.println(idSeleccionado);
-            
-            
-        }
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-       
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
     }
 }

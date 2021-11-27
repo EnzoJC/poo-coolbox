@@ -26,41 +26,30 @@
           <Group type="102" attributes="0">
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnVenta" min="-2" pref="210" max="-2" attributes="0"/>
+                  <Component id="btnCaja" min="-2" pref="210" max="-2" attributes="0"/>
                   <Component id="btnProductos" min="-2" pref="210" max="-2" attributes="0"/>
                   <Component id="btnEmpleados" min="-2" pref="210" max="-2" attributes="0"/>
                   <Component id="btnAsistencia" min="-2" pref="210" max="-2" attributes="0"/>
-                  <Component id="btnVenta" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                  <Component id="btnCaja" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                  <Component id="btnAsistencias" min="-2" pref="210" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="890" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="btnVenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                      <Component id="btnCaja" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnProductos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                      <Component id="btnEmpleados" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                      <Component id="btnAsistencia" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="btnAsistencias" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="304" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnVenta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+              <Component id="btnCaja" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+              <Component id="btnProductos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+              <Component id="btnEmpleados" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+              <Component id="btnAsistencia" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="369" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,43 +105,6 @@
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Productos"/>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" pref="809" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JButton" name="btnAsistencias">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Asistencia Personal"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
