@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmVenta extends javax.swing.JFrame {
-    private Producto producto = new Producto();
+    private final Producto productoCrud = new Producto();
     private Empleado empleado;
-    private Cliente cliente = new Cliente();
-    private DetalleVenta detalleVenta = new DetalleVenta();
+    private final Cliente clienteCrud = new Cliente();
+    private DetalleVenta detalleVentaCrud = new DetalleVenta();
     private Venta venta = new Venta();
     private Movimiento movimiento= new Movimiento();
     private Caja caja= new Caja();
@@ -143,6 +143,9 @@ public class FrmVenta extends javax.swing.JFrame {
 
         txtImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtImporteKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImporteKeyTyped(evt);
             }
@@ -276,15 +279,15 @@ public class FrmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoProductoKeyPressed
 
     private void txtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteKeyTyped
-        if ((evt.getKeyChar() < '0' || evt.getKeyChar() > '9') && evt.getKeyChar() != java.awt.event.KeyEvent.VK_ENTER) {
+        if ((evt.getKeyChar() < '0' || evt.getKeyChar() > '9')) {
             evt.consume();
         }
         if (venta.getListaDetalleVenta().size() > 0) {
-            float vuelto = (Float.parseFloat(txtImporte.getText()) - venta.obtenerTotal());
+            float vuelto = (Float.parseFloat("0" + txtImporte.getText() + Character.toString(evt.getKeyChar())) - venta.obtenerTotal());
             if (vuelto >= 0) {
                 lvlCambio.setText("S/ " + vuelto);
             } else {
-                lvlCambio.setText("El monto no es suficiente");
+                lvlCambio.setText("Sin cambio");
             }
         } else {
             JOptionPane.showMessageDialog(null, "No hay productos en la lista");
@@ -294,6 +297,10 @@ public class FrmVenta extends javax.swing.JFrame {
     private void txtClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyPressed
         ingresarCliente(evt);
     }//GEN-LAST:event_txtClienteKeyPressed
+
+    private void txtImporteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteKeyPressed
+        
+    }//GEN-LAST:event_txtImporteKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAtras;
@@ -320,17 +327,20 @@ public class FrmVenta extends javax.swing.JFrame {
 
     private void realizarVenta() {
         if (venta.getListaDetalleVenta().size() > 0){
-            venta.setCliente(cliente.buscarPorDni(txtCliente.getText()));
             venta.setEmpleado(empleado);
+            venta.setCliente(clienteCrud.buscarPorDni(txtCliente.getText()));
             venta.setTotal(venta.obtenerTotal());
-            venta.setId(venta.ulitmoId() + 1);
             venta.create(venta);
-
+            Venta ventaAux = venta.buscarPorId(venta.ulitmoId());
+            
             for (DetalleVenta detalleVenta : listaDetalleVenta) {
-                detalleVenta.setVenta(venta);
-                detalleVenta.getProducto().setStock( detalleVenta.getProducto().getStock()- detalleVenta.getCantidad());
-                producto.update(detalleVenta.getProducto());
-                detalleVenta.create(detalleVenta);
+                detalleVenta.setVenta(ventaAux);
+                detalleVenta.getProducto().setStock(detalleVenta.getProducto().getStock()- detalleVenta.getCantidad());
+                productoCrud.update(detalleVenta.getProducto());
+                JOptionPane.showMessageDialog(rootPane, "ID producto: " + detalleVenta.getProducto().getId());
+                JOptionPane.showMessageDialog(rootPane, "ID venta: " + detalleVenta.getVenta().getId());
+                JOptionPane.showMessageDialog(rootPane, "cantidad: " + detalleVenta.getCantidad());
+                detalleVentaCrud.create(detalleVenta);
             }
             JOptionPane.showMessageDialog(null, "Venta Exitosa");
             // TODO limpiar los campos y la tabla
@@ -341,9 +351,8 @@ public class FrmVenta extends javax.swing.JFrame {
                 movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(),operacion.buscarPorId(2));
             }
             movimiento.create(movimiento);
-            caja.setMonto(caja.buscarPorId(1).getMonto()+movimiento.getMonto());
-            System.out.println("monto " + caja.getMonto());
-            caja.update(caja);
+//            caja.setMonto(caja.buscarPorId(1).getMonto()+movimiento.getMonto());
+//            caja.update(caja);
         } else {
             JOptionPane.showMessageDialog(null, "No hay productos en la lista");
         }
@@ -356,7 +365,7 @@ public class FrmVenta extends javax.swing.JFrame {
     private void agregarProducto(KeyEvent evt) {
         if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
             int id = Integer.parseInt(txtCodigoProducto.getText());
-            Producto productoNuevo = producto.buscarPorId(id);
+            Producto productoNuevo = productoCrud.buscarPorId(id);
             
             if (productoNuevo == null) {
                 JOptionPane.showMessageDialog(null, "El producto no existe");
@@ -378,6 +387,7 @@ public class FrmVenta extends javax.swing.JFrame {
                                 return;
                             } else {
                                 JOptionPane.showMessageDialog(null, "Con esa nueva cantidad se supera el stock");
+                                return;
                             }
                         }
                     }
@@ -405,7 +415,7 @@ public class FrmVenta extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private float roundFloat(float f, int places) {
         BigDecimal bigDecimal = new BigDecimal(Float.toString(f));
         bigDecimal = bigDecimal.setScale(places, RoundingMode.HALF_UP);
@@ -414,10 +424,10 @@ public class FrmVenta extends javax.swing.JFrame {
 
     private void ingresarCliente(KeyEvent evt) {
         if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
-            cliente = cliente.buscarPorDni(txtCliente.getText());
-            if (cliente == null) {
+            Cliente buscarCliente = clienteCrud.buscarPorDni(txtCliente.getText());
+            if (buscarCliente == null) {
                 // Lanzar panel de registro de cliente
-                registrarCliente(cliente);
+                registrarCliente(buscarCliente);
 
                 // despues de registrar tambien se bloquea el txt
                 txtCliente.setEnabled(false);

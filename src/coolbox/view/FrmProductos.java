@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class FrmProductos extends javax.swing.JFrame {
     private List<Producto> listaProductos = new ArrayList<>();
-    private Producto producto = new Producto();
+    private final Producto productoCrud = new Producto();
     private DefaultTableModel dtmProductos = poblarTabla();
     
     public FrmProductos() {
@@ -100,35 +100,34 @@ public class FrmProductos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +165,8 @@ public class FrmProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Si se selecciona una fila de la tabla, entrara en modo "actualizar producto"
+        // sino solo entrara como "registrar producto"
         if (tblProductos.getSelectedRow() >= 0){
             int id = Integer.parseInt((String) tblProductos.getValueAt(tblProductos.getSelectedRow(), 0));
             actualizarProducto(id);
@@ -175,7 +176,13 @@ public class FrmProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarProducto();
+        if (tblProductos.getSelectedRow() >= 0){
+            int id = Integer.parseInt((String) tblProductos.getValueAt(tblProductos.getSelectedRow(), 0));
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas borrar este producto?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == JOptionPane.YES_OPTION){
+                eliminarProducto(id);
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -208,21 +215,29 @@ public class FrmProductos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void guardarProducto() {
-        Producto productoNuevo = new Producto(txtNombre.getText(),
-                Float.parseFloat(txtPrecioCompra.getText()),
-                Float.parseFloat(txtPrecioVenta.getText()),
+        // Creando nuevo producto con los datos ingresados del formulario
+        Producto productoNuevo = new Producto(txtNombre.getText(), 
+                Float.parseFloat(txtPrecioCompra.getText()), 
+                Float.parseFloat(txtPrecioVenta.getText()), 
                 Integer.parseInt(txtStock.getText()));
-
-        listaProductos = new Producto().read();
+        
+        listaProductos = productoCrud.read(); // Obteniendo la lista de productos de la base de datos
+        
+        // Recorriendo la lista de productos para saber si el producto que se quiere registrar ya existe en la base de datos
         for (Producto p : listaProductos) {
+            // Si el producto existe muestra un mensaje y se sale del metodo (return;)
             if (p.getNombre().equals(productoNuevo.getNombre())) {
                 JOptionPane.showMessageDialog(null, "Este producto ya existe"); 
                 return;
             }
         }
+        // En caso el producto a registrar si sea completamente nuevo se procede 
+        // a asignarle un id a partir del ultimo id del ultimo  producto en la base de datos
         productoNuevo.setId(listaProductos.size() + 1);
-        listaProductos.add(productoNuevo);
-        producto.create(productoNuevo);
+        listaProductos.add(productoNuevo); // Luego se procede a insertarlo a la lista de productos
+        productoCrud.create(productoNuevo); // Se inserta ese nuevo producto a la base de datos
+        // Se procede a agregar el nuevo producto al DefaultTableModel, este esta ligado
+        // a la tabla del formulario, por lo que tambien se actualizara en la tabla del formulario
         String[] datos = new String[5];
         datos[0] = productoNuevo.getId() + "";
         datos[1] = productoNuevo.getNombre();
@@ -230,40 +245,43 @@ public class FrmProductos extends javax.swing.JFrame {
         datos[3] = productoNuevo.getPrecioVenta() + "";
         datos[4] = productoNuevo.getStock()+ "";
         dtmProductos.addRow(datos);
-        JOptionPane.showMessageDialog(null, "Hola");
         limpiarCampos();
     }
 
-    private void eliminarProducto() {
-       
+    private void eliminarProducto(int id) {
+       Producto productoEliminar = productoCrud.buscarPorId(id);
+       if (productoEliminar != null) {
+           for (int i = 0; i < listaProductos.size(); i++) {
+               if (listaProductos.get(i).getId() == productoEliminar.getId()) {
+                   productoCrud.delete(productoEliminar);
+                   listaProductos.remove(i);
+               }
+           }
+            tblProductos.setModel(poblarTabla());
+            limpiarCampos();
+       }
     }
+    
     private void actualizarProducto(int id){
-        Producto productoAux = producto.buscarPorId(id);
+        Producto productoAux = productoCrud.buscarPorId(id);
         if (productoAux != null){          
             productoAux.setId(id);
             productoAux.setNombre(txtNombre.getText());
             productoAux.setPrecioCompra(Float.parseFloat(txtPrecioCompra.getText()));
             productoAux.setPrecioVenta(Float.parseFloat(txtPrecioVenta.getText()));
             productoAux.setStock(Integer.parseInt(txtStock.getText()));
-            producto.update(productoAux);
+            productoCrud.update(productoAux);
             
             for (Producto p : listaProductos) {
-                if (p.getId() == productoAux.getId()){
+                if (p.getId() == productoAux.getId())
                     p = productoAux;
-                }
-                String[] datos = new String[5];
-                datos[0] = p.getId() + "";
-                datos[1] = p.getNombre();
-                datos[2] = p.getPrecioCompra()+ "";
-                datos[3] = p.getPrecioVenta() + "";
-                datos[4] = p.getStock()+ "";
-                dtmProductos.addRow(datos);
             }
             tblProductos.setModel(poblarTabla());
             btnGuardar.setText("Guardar");
             limpiarCampos();
         }
     }
+    
     private void limpiarCampos(){
         txtNombre.setText("");
         txtPrecioCompra.setText("");
@@ -272,12 +290,11 @@ public class FrmProductos extends javax.swing.JFrame {
     }
     
     private DefaultTableModel poblarTabla(){     
-        listaProductos = producto.read();
+        listaProductos = productoCrud.read();
         DefaultTableModel dtm = new DefaultTableModel();
         String[] tituloColumnas = {"ID", "Nombre", "Precio de Compra" , "Precio de Venta", "Stock"};
-	for (String i : tituloColumnas) {
+	for (String i : tituloColumnas)
 	    dtm.addColumn(i);
-	}
         for(Producto p : listaProductos){
             String[] datos = new String[5];
             datos[0] = p.getId() + "";

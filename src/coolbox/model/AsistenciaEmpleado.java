@@ -170,7 +170,7 @@ public class AsistenciaEmpleado implements ICrud<AsistenciaEmpleado>{
     }
     
     public int ulitmoId(){
-        if(read().size()==0){
+        if(read().isEmpty()){
             return 0;
         }
         return read().get(read().size()-1).getId();

@@ -199,4 +199,27 @@ public class Venta implements ICrud<Venta>{
         }
         return total;
     }
+    
+    public Venta buscarPorId(int id) {
+        try {
+            ps = Conexion.getConexion().prepareStatement("select * from ventas where id=?");
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Venta(rs.getInt("id"), empleado.buscarPorId(rs.getInt("empleados_id")), cliente.buscarPorId(rs.getInt("clientes_id")), Float.parseFloat(rs.getString("total")));
+            }
+            return null;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+        } finally {
+            try {
+                Conexion.getConexion().close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error:\n" + ex);
+            }
+        }
+        return null;
+    }
 }
