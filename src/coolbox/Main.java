@@ -1,6 +1,6 @@
 package coolbox;
 
-import coolbox.view.FrmLogin;
+import coolbox.gui.FrmLogin;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatLightLaf;

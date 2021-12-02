@@ -1,4 +1,4 @@
-package coolbox.view;
+package coolbox.gui;
 
 import coolbox.model.AsistenciaEmpleado;
 import coolbox.model.Empleado;

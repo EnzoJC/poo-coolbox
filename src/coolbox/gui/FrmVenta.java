@@ -1,4 +1,4 @@
-package coolbox.view;
+package coolbox.gui;
 
 import coolbox.model.Caja;
 import coolbox.model.Cliente;
@@ -337,22 +337,20 @@ public class FrmVenta extends javax.swing.JFrame {
                 detalleVenta.setVenta(ventaAux);
                 detalleVenta.getProducto().setStock(detalleVenta.getProducto().getStock()- detalleVenta.getCantidad());
                 productoCrud.update(detalleVenta.getProducto());
-                JOptionPane.showMessageDialog(rootPane, "ID producto: " + detalleVenta.getProducto().getId());
-                JOptionPane.showMessageDialog(rootPane, "ID venta: " + detalleVenta.getVenta().getId());
-                JOptionPane.showMessageDialog(rootPane, "cantidad: " + detalleVenta.getCantidad());
                 detalleVentaCrud.create(detalleVenta);
             }
             JOptionPane.showMessageDialog(null, "Venta Exitosa");
             // TODO limpiar los campos y la tabla
             Movimiento movimiento;
             if(venta.obtenerTotal()>0){
-                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(),operacion.buscarPorId(1));
+                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(1));
             }else{
-                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(),operacion.buscarPorId(2));
+                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(2));
             }
             movimiento.create(movimiento);
-//            caja.setMonto(caja.buscarPorId(1).getMonto()+movimiento.getMonto());
-//            caja.update(caja);
+            caja.setMonto(caja.buscarPorId(1).getMonto() + movimiento.getMonto());
+            caja.update(caja);
+            
         } else {
             JOptionPane.showMessageDialog(null, "No hay productos en la lista");
         }

@@ -75,7 +75,7 @@ public class Movimiento implements ICrud<Movimiento>{
     @Override
     public Boolean create(Movimiento movimiento) {
         try {
-            ps = Conexion.getConexion().prepareStatement("insert into movimientos (empleados_id, caja_id, monto,operaciones_id) values (?, ?, ?, ?)");
+            ps = Conexion.getConexion().prepareStatement("insert into movimientos (empleados_id, caja_id, monto, operaciones_id) values (?, ?, ?, ?)");
             ps.setInt(1, movimiento.getEmpleado().getId());
             ps.setInt(2, movimiento.getCaja().getId());
             ps.setFloat(3, movimiento.getMonto());

@@ -30,6 +30,14 @@ public class Empleado implements ICrud<Empleado>{
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
+    
+    public Empleado(String nombres, String apellidos, String dni, String usuario, String contrasenia) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+    }
 
     public Empleado() {
     }

@@ -1,4 +1,4 @@
-package coolbox.view;
+package coolbox.gui;
 
 import coolbox.model.Cliente;
 import javax.swing.WindowConstants;
