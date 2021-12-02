@@ -21,6 +21,8 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
         btnCaja = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
+        btnVerAsistencias = new javax.swing.JButton();
+        btnVerCajas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,18 +66,36 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnVerAsistencias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVerAsistencias.setText("Ver Asistencias");
+        btnVerAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerAsistenciasActionPerformed(evt);
+            }
+        });
+
+        btnVerCajas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVerCajas.setText("Ver Cajas");
+        btnVerCajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerCajasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVerAsistencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnCaja, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(btnVerCajas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(890, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,7 +111,11 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEmpleados)
                 .addGap(19, 19, 19)
                 .addComponent(btnAsistencia)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVerAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVerCajas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,6 +146,16 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
         frmAsistencia.setVisible(true);
     }//GEN-LAST:event_btnAsistenciaActionPerformed
 
+    private void btnVerAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAsistenciasActionPerformed
+        FrmVerAsistencias frmVerAsistencias = new FrmVerAsistencias();
+        frmVerAsistencias.setVisible(true);
+    }//GEN-LAST:event_btnVerAsistenciasActionPerformed
+
+    private void btnVerCajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCajasActionPerformed
+        FrmCajas frmCajas = new FrmCajas();
+        frmCajas.setVisible(true);
+    }//GEN-LAST:event_btnVerCajasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencia;
@@ -129,5 +163,7 @@ public class FrmPanelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnVenta;
+    private javax.swing.JButton btnVerAsistencias;
+    private javax.swing.JButton btnVerCajas;
     // End of variables declaration//GEN-END:variables
 }

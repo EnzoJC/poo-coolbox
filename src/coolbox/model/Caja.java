@@ -45,9 +45,9 @@ public class Caja implements ICrud<Caja> {
     @Override
     public Boolean create(Caja caja) {
         try {
-            ps = Conexion.getConexion().prepareStatement("insert into caja (monto) values (?)");
-            ps.setFloat(1, caja.getMonto());
-            ps.setInt(2, caja.getId());
+            ps = Conexion.getConexion().prepareStatement("insert into caja (id,monto) values (?,?)");
+            ps.setInt(1, caja.getId());
+            ps.setFloat(2, caja.getMonto());
             
             int resultado = ps.executeUpdate();
             

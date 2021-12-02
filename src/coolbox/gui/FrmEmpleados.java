@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
 public class FrmEmpleados extends javax.swing.JFrame {
     private final Empleado empleadoCrud = new Empleado();
     private List<Empleado> listaEmpleados = new ArrayList<>();
-    private DefaultTableModel dtmEmpleados = poblarTabla();
     public FrmEmpleados() {
         initComponents();
         this.setLocationRelativeTo(null);
 	this.setResizable(false);
-        tblEmpleados.setModel(dtmEmpleados);
+        listaEmpleados= empleadoCrud.read();
+        tblEmpleados.setModel(poblarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -233,7 +233,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
 
     private void guardarEmpleado() {
         Empleado empleadoNuevo = new Empleado(txtNombres.getText(), txtApellidos.getText(), txtDni.getText(), txtUsuario.getText(), txtContrasenia.getText());
-        listaEmpleados = empleadoCrud.read();
+       // listaEmpleados = empleadoCrud.read();
         
         for (Empleado e : listaEmpleados) {
             if (e.getDni().equals(empleadoNuevo.getDni())) {
@@ -253,7 +253,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
         datos[3] = empleadoNuevo.getDni();
         datos[4] = empleadoNuevo.getUsuario();
         datos[5] = empleadoNuevo.getContrasenia();
-        dtmEmpleados.addRow(datos);
+        tblEmpleados.setModel(poblarTabla());
         limpiarCampos();
     }
     
@@ -282,9 +282,10 @@ public class FrmEmpleados extends javax.swing.JFrame {
             empleadoAux.setContrasenia(txtContrasenia.getText());
             empleadoAux.update(empleadoAux);
             
-            for (Empleado e : listaEmpleados) {
-                if (e.getId() == empleadoCrud.getId())
-                    e = empleadoAux;
+            for (int i=0;i<listaEmpleados.size();i++) {
+                if (listaEmpleados.get(i).getId() == empleadoAux.getId())
+                    listaEmpleados.set(i, empleadoAux);
+                    JOptionPane.showMessageDialog(null, listaEmpleados.get(i).getNombres());
             }
             tblEmpleados.setModel(poblarTabla());
             btnGuardar.setText("Guardar");
@@ -303,7 +304,7 @@ public class FrmEmpleados extends javax.swing.JFrame {
     }
     
     private DefaultTableModel poblarTabla() {
-        listaEmpleados = empleadoCrud.read();
+        
         DefaultTableModel dtm = new DefaultTableModel();
         String[] tituloColumnas = {"ID", "Nombre", "Apellidos" , "DNI", "Usuario"};
 	for (String i : tituloColumnas)
