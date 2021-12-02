@@ -9,12 +9,14 @@ import javax.swing.table.DefaultTableModel;
 public class FrmProductos extends javax.swing.JFrame {
     private List<Producto> listaProductos = new ArrayList<>();
     private final Producto productoCrud = new Producto();
-    private DefaultTableModel dtmProductos = poblarTabla();
+    private DefaultTableModel dtmProductos;
     
     public FrmProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
 	this.setResizable(false);
+        listaProductos = productoCrud.read();
+        dtmProductos = poblarTabla();
         tblProductos.setModel(dtmProductos);
     }
     
@@ -220,9 +222,7 @@ public class FrmProductos extends javax.swing.JFrame {
                 Float.parseFloat(txtPrecioCompra.getText()), 
                 Float.parseFloat(txtPrecioVenta.getText()), 
                 Integer.parseInt(txtStock.getText()));
-        
-        listaProductos = productoCrud.read(); // Obteniendo la lista de productos de la base de datos
-        
+          
         // Recorriendo la lista de productos para saber si el producto que se quiere registrar ya existe en la base de datos
         for (Producto p : listaProductos) {
             // Si el producto existe muestra un mensaje y se sale del metodo (return;)
@@ -247,7 +247,7 @@ public class FrmProductos extends javax.swing.JFrame {
         dtmProductos.addRow(datos);
         limpiarCampos();
     }
-
+    
     private void eliminarProducto(int id) {
        Producto productoEliminar = productoCrud.buscarPorId(id);
        if (productoEliminar != null) {
@@ -272,9 +272,9 @@ public class FrmProductos extends javax.swing.JFrame {
             productoAux.setStock(Integer.parseInt(txtStock.getText()));
             productoCrud.update(productoAux);
             
-            for (Producto p : listaProductos) {
-                if (p.getId() == productoAux.getId())
-                    p = productoAux;
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i).getId() == productoAux.getId())
+                    listaProductos.set(i, productoAux);
             }
             tblProductos.setModel(poblarTabla());
             btnGuardar.setText("Guardar");
@@ -292,7 +292,6 @@ public class FrmProductos extends javax.swing.JFrame {
     }
     
     private DefaultTableModel poblarTabla(){     
-        listaProductos = productoCrud.read();
         DefaultTableModel dtm = new DefaultTableModel();
         String[] tituloColumnas = {"ID", "Nombre", "Precio de Compra" , "Precio de Venta", "Stock"};
 	for (String i : tituloColumnas)

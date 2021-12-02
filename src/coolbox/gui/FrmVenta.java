@@ -1,5 +1,13 @@
 package coolbox.gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BarcodeQRCode;
+import com.itextpdf.text.pdf.PdfWriter;
 import coolbox.model.Caja;
 import coolbox.model.Cliente;
 import coolbox.model.DetalleVenta;
@@ -8,12 +16,21 @@ import coolbox.model.Movimiento;
 import coolbox.model.Operacion;
 import coolbox.model.Producto;
 import coolbox.model.Venta;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -267,7 +284,9 @@ public class FrmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
-        realizarVenta();
+        if (txtCodigoProducto.getText().length() > 0 && txtCliente.getText().length() > 0){
+            realizarVenta();
+        }
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
@@ -295,7 +314,9 @@ public class FrmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtImporteKeyTyped
 
     private void txtClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyPressed
-        ingresarCliente(evt);
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            ingresarCliente();
+        }
     }//GEN-LAST:event_txtClienteKeyPressed
 
     private void txtImporteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImporteKeyPressed
@@ -335,10 +356,11 @@ public class FrmVenta extends javax.swing.JFrame {
             
             for (DetalleVenta detalleVenta : listaDetalleVenta) {
                 detalleVenta.setVenta(ventaAux);
-                detalleVenta.getProducto().setStock(detalleVenta.getProducto().getStock()- detalleVenta.getCantidad());
+                detalleVenta.getProducto().setStock(detalleVenta.getProducto().getStock() - detalleVenta.getCantidad());
                 productoCrud.update(detalleVenta.getProducto());
                 detalleVentaCrud.create(detalleVenta);
             }
+            
             JOptionPane.showMessageDialog(null, "Venta Exitosa");
             // TODO limpiar los campos y la tabla
             Movimiento movimiento;
@@ -350,6 +372,8 @@ public class FrmVenta extends javax.swing.JFrame {
             movimiento.create(movimiento);
             caja.setMonto(caja.buscarPorId(1).getMonto() + movimiento.getMonto());
             caja.update(caja);
+            
+            generarComprobante(listaDetalleVenta, ventaAux);
             
         } else {
             JOptionPane.showMessageDialog(null, "No hay productos en la lista");
@@ -420,24 +444,23 @@ public class FrmVenta extends javax.swing.JFrame {
         return bigDecimal.floatValue();
     }
 
-    private void ingresarCliente(KeyEvent evt) {
-        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
-            Cliente buscarCliente = clienteCrud.buscarPorDni(txtCliente.getText());
-            if (buscarCliente == null) {
-                // Lanzar panel de registro de cliente
-                registrarCliente(buscarCliente);
-
-                // despues de registrar tambien se bloquea el txt
-                txtCliente.setEnabled(false);
-            } else {
-                txtCliente.setEnabled(false);
-            }
+    private void ingresarCliente() {
+        Cliente buscarCliente = clienteCrud.buscarPorDni(txtCliente.getText());
+        if (buscarCliente == null) {
+            // Lanzar panel de registro de cliente
+            registrarCliente(buscarCliente);
+        } else {
+            txtCliente.setEnabled(false);
         }
     }
 
     private void registrarCliente(Cliente c) {
         DialogCliente dc = new DialogCliente(this, true);
         dc.setVisible(true);
+        if (!dc.isDisplayable()) {
+            txtCliente.setEnabled(true);
+            txtCliente.setText("");
+        }
     }
     
     private DefaultTableModel cargarTitulos() {
@@ -464,5 +487,180 @@ public class FrmVenta extends javax.swing.JFrame {
             dtm.addRow(datos);
         }
         return dtm;
+    }
+    
+    private void generarComprobante(List<DetalleVenta> lista, Venta v) {
+        Document documento = new Document();
+        Rectangle dimensioneHoja = new Rectangle(226, 283);
+        documento.setPageSize(dimensioneHoja);
+        documento.setMargins(7, 7, 7, 7);
+        
+        try{
+            PdfWriter.getInstance(documento , new FileOutputStream("text.pdf"));
+            Font fuenteTitulo = new Font(Font.FontFamily.COURIER, 10);
+            Font fuenteCuerpo = new Font(Font.FontFamily.COURIER, 6);
+            
+            Paragraph titulo1 = new Paragraph();
+            titulo1.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo1.setFont(fuenteTitulo);
+            titulo1.setLeading(0.0f, 1.0f);
+            titulo1.add("C O O L B O X");
+            
+            Paragraph titulo2 = new Paragraph();
+            titulo2.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo2.setFont(fuenteCuerpo);
+            titulo2.setLeading(0.0f, 1.0f);
+            titulo2.add("RASH PERU S.A.C.");
+            
+            Paragraph titulo3 = new Paragraph();
+            titulo3.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo3.setFont(fuenteCuerpo);
+            titulo3.setLeading(0.0f, 1.0f);
+            titulo3.add("AV SALAVERRY 3310 - LIMA-LIMA-MAGDALENA DEL MAR");
+            
+            Paragraph titulo4 = new Paragraph();
+            titulo4.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo4.setFont(fuenteCuerpo);
+            titulo4.setLeading(0.0f, 1.0f);
+            titulo4.add("RUC: 20378890161");
+            
+            Paragraph titulo5 = new Paragraph();
+            titulo5.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo5.setFont(fuenteCuerpo);
+            titulo5.setLeading(0.0f, 1.0f);
+            titulo5.add("AV. AMERICA NORTE 1245 -INT. 1");
+            
+            Paragraph titulo6 = new Paragraph();
+            titulo6.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo6.setFont(fuenteCuerpo);
+            titulo6.setLeading(0.0f, 1.0f);
+            titulo6.add("7 DENTRO DEL C.C.-TRUJILLO-TRU");
+            
+            Paragraph titulo7 = new Paragraph();
+            titulo7.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo7.setFont(fuenteCuerpo);
+            titulo7.setLeading(0.0f, 1.0f);
+            titulo7.add("JILLO-LA LIBERTAD");
+            
+            Paragraph titulo8 = new Paragraph();
+            titulo8.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo8.setFont(fuenteCuerpo);
+            titulo8.setLeading(0.0f, 1.0f);
+            titulo8.add("TELF: (044) 600060");
+            
+            Paragraph titulo9 = new Paragraph();
+            titulo9.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo9.setFont(fuenteTitulo);
+            titulo9.setLeading(0.0f, 1.0f);
+            titulo9.add("FACTURA ELECTRÓNICA");
+            
+            Paragraph titulo10 = new Paragraph();
+            titulo10.setAlignment(Paragraph.ALIGN_CENTER);
+            titulo10.setFont(fuenteTitulo);
+            titulo10.setLeading(0.0f, 1.0f);
+            titulo10.add("BV01-00" + v.getId());
+            
+            Paragraph titulo11 = new Paragraph();
+            titulo11.setAlignment(Paragraph.ALIGN_LEFT);
+            titulo11.setFont(fuenteCuerpo);
+            titulo11.setLeading(0.0f, 1.0f);
+            titulo11.add("FECHA DE EMISIÓN: " + LocalDate.now().getDayOfMonth() + "/" + LocalDate.now().getMonthValue() + "/" + LocalDate.now().getYear());
+            titulo11.add("  HORA: " + LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
+            
+            Paragraph titulo12 = new Paragraph();
+            titulo12.setAlignment(Paragraph.ALIGN_LEFT);
+            titulo12.setFont(fuenteCuerpo);
+            titulo12.setLeading(0.0f, 1.0f);
+            titulo12.add("COD.  PRODUCTO                     CANT.   PRECIO UNIT.");
+            
+            Paragraph pie1 = new Paragraph();
+            pie1.setAlignment(Paragraph.ALIGN_CENTER);
+            pie1.setFont(fuenteCuerpo);
+            pie1.setLeading(0.0f, 1.0f);
+            pie1.add("Autorizado mediante resolución Nro.0180050001610/SUNAT\n" +
+                    "Representación impresa de la Factura Electrónica\n" +
+                    "Este documento puede ser validado en www.coolbox.pe");
+            
+            Paragraph pie2 = new Paragraph();
+            pie2.setAlignment(Paragraph.ALIGN_CENTER);
+            pie2.setFont(fuenteCuerpo);
+            pie2.setLeading(0.0f, 1.0f);
+            pie2.add("TODO CAMBIO O DEVOLUCIÓN DE PRODUCTO SERÁ DENTRO DE\n" +
+                    "LOS 07 DÍAS DE REALIZADA LA COMPRA, CON SUS ACCESORIOS\n" +
+                    "Y EMPAQUE COMPLETOS, SIN SEÑALES DE USO.\n" +
+                    "DESCARGUE NUESTRA POLÍTICA DE CAMBIO O DEVOLUCIONES Y\n" +
+                    "GARANTÍA DEL PRODUCTO EN WWW.COOLBOX.PE");
+            
+            Paragraph subtotal = new Paragraph();
+            subtotal.setAlignment(Paragraph.ALIGN_LEFT);
+            subtotal.setFont(fuenteCuerpo);
+            subtotal.setLeading(0.0f, 1.0f);
+            subtotal.add("SUBTOTAL:                                          " + v.getTotal() * 0.82);
+            
+            Paragraph igv = new Paragraph();
+            igv.setAlignment(Paragraph.ALIGN_LEFT);
+            igv.setFont(fuenteCuerpo);
+            igv.setLeading(0.0f, 1.0f);
+            igv.add("IGV:                                               " + v.getTotal() * 0.18);
+            
+            Paragraph total = new Paragraph();
+            total.setAlignment(Paragraph.ALIGN_LEFT);
+            total.setFont(fuenteCuerpo);
+            total.setLeading(0.0f, 1.0f);
+            total.add("TOTAL:                                             " + v.getTotal());
+            
+            Paragraph raya = new Paragraph();
+            raya.setAlignment(Paragraph.ALIGN_CENTER);
+            raya.setFont(fuenteCuerpo);
+            raya.setLeading(0.0f, 1.0f);
+            raya.add("__________________________________________________________");
+            
+            documento.open();
+            documento.add(titulo1);
+            documento.add(titulo2);
+            documento.add(titulo3);
+            documento.add(titulo4);
+            documento.add(titulo5);
+            documento.add(titulo6);
+            documento.add(titulo7);
+            documento.add(titulo8);
+            documento.add(titulo9);
+            documento.add(titulo10);
+            documento.add(titulo11);
+            documento.add(raya);
+            documento.add(titulo12);
+            documento.add(raya);
+            for (DetalleVenta dv : lista) {
+                Paragraph detalle = new Paragraph();
+                detalle.setAlignment(Paragraph.ALIGN_LEFT);
+                detalle.setFont(fuenteCuerpo);
+                detalle.setLeading(0.0f, 1.0f);
+                detalle.add(dv.getProducto().getId() + "       " + 
+                            dv.getProducto().getNombre() + "          " + dv.getCantidad() + "            " + 
+                            dv.getProducto().getPrecioVenta());
+                documento.add(detalle);
+            }
+            documento.add(new Paragraph("\n"));
+            documento.add(raya);
+            documento.add(subtotal);
+            documento.add(igv);
+            documento.add(total);
+            BarcodeQRCode qr = new BarcodeQRCode("BV01-00" + v.getId(), 1, 1, null);
+            Image qrImagen = qr.getImage();
+            qrImagen.scaleAbsolute(40, 40);
+            qrImagen.setAbsolutePosition(80, 15);
+            documento.add(qrImagen);
+            documento.add(raya);
+            documento.add(pie1);
+            documento.add(new Paragraph(""));
+            documento.add(pie2);
+            
+            documento.close();
+            Desktop.getDesktop().open(new File("text.pdf"));
+        } catch(DocumentException | FileNotFoundException de) {
+            JOptionPane.showMessageDialog(rootPane, de.getMessage());
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
     }
 }

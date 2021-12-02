@@ -5,7 +5,6 @@
  */
 package coolbox.gui;
 
-import com.sun.javafx.image.impl.IntArgb;
 import coolbox.model.Caja;
 import coolbox.model.Empleado;
 import java.util.ArrayList;
