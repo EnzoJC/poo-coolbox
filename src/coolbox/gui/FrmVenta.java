@@ -595,19 +595,19 @@ public class FrmVenta extends javax.swing.JFrame {
             subtotal.setAlignment(Paragraph.ALIGN_LEFT);
             subtotal.setFont(fuenteCuerpo);
             subtotal.setLeading(0.0f, 1.0f);
-            subtotal.add("SUBTOTAL:                                          " + v.getTotal() * 0.82);
+            subtotal.add("SUBTOTAL:                                      S/ " + roundFloat(v.getTotal() * 0.82f, 2)); 
             
             Paragraph igv = new Paragraph();
             igv.setAlignment(Paragraph.ALIGN_LEFT);
             igv.setFont(fuenteCuerpo);
             igv.setLeading(0.0f, 1.0f);
-            igv.add("IGV:                                               " + v.getTotal() * 0.18);
+            igv.add("IGV:                                           S/ " + roundFloat(v.getTotal() * 0.18f, 2)); 
             
             Paragraph total = new Paragraph();
             total.setAlignment(Paragraph.ALIGN_LEFT);
             total.setFont(fuenteCuerpo);
             total.setLeading(0.0f, 1.0f);
-            total.add("TOTAL:                                             " + v.getTotal());
+            total.add("TOTAL:                                           S/ " + roundFloat(v.getTotal(), 2));
             
             Paragraph raya = new Paragraph();
             raya.setAlignment(Paragraph.ALIGN_CENTER);
