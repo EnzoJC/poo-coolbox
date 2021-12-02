@@ -82,11 +82,12 @@ public class Producto implements ICrud<Producto> {
     @Override
     public Boolean create(Producto producto) {
         try {
-            ps = Conexion.getConexion().prepareStatement("insert into productos (nombre,precio_compra,precio_venta,stock) values (?,?,?,?)");
-            ps.setString(1, producto.getNombre());
-            ps.setFloat(2, producto.getPrecioCompra());
-            ps.setFloat(3, producto.getPrecioVenta());
-            ps.setInt(4, producto.getStock());
+            ps = Conexion.getConexion().prepareStatement("insert into productos (id, nombre,precio_compra,precio_venta,stock) values (?,?,?,?,?)");
+            ps.setInt(1, producto.getId());
+            ps.setString(2, producto.getNombre());
+            ps.setFloat(3, producto.getPrecioCompra());
+            ps.setFloat(4, producto.getPrecioVenta());
+            ps.setInt(5, producto.getStock());
             int resultado = ps.executeUpdate();
             
             return resultado > 0;

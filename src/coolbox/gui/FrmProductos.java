@@ -238,6 +238,7 @@ public class FrmProductos extends javax.swing.JFrame {
         productoCrud.create(productoNuevo); // Se inserta ese nuevo producto a la base de datos
         // Se procede a agregar el nuevo producto al DefaultTableModel, este esta ligado
         // a la tabla del formulario, por lo que tambien se actualizara en la tabla del formulario
+        JOptionPane.showMessageDialog(rootPane, productoNuevo.getId());
         String[] datos = new String[5];
         datos[0] = productoNuevo.getId() + "";
         datos[1] = productoNuevo.getNombre();

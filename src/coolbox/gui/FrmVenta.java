@@ -41,7 +41,7 @@ public class FrmVenta extends javax.swing.JFrame {
     private DetalleVenta detalleVentaCrud = new DetalleVenta();
     private Venta venta = new Venta();
     private Movimiento movimiento= new Movimiento();
-    private Caja caja= new Caja();
+    private Caja cajaCrud= new Caja();
     private Operacion operacion= new Operacion();
     private DefaultTableModel dtmDetalleProductos = cargarTitulos();
     private List<DetalleVenta> listaDetalleVenta = new ArrayList<>();
@@ -290,7 +290,13 @@ public class FrmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        quitarProducto();
+        if (tblVentas.getSelectedRow() >= 0){
+            int id = Integer.parseInt((String) tblVentas.getValueAt(tblVentas.getSelectedRow(), 0));
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas quitar este producto?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == JOptionPane.YES_OPTION){
+                quitarProducto(id);
+            }
+        }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void txtCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyPressed
@@ -365,13 +371,14 @@ public class FrmVenta extends javax.swing.JFrame {
             // TODO limpiar los campos y la tabla
             Movimiento movimiento;
             if(venta.obtenerTotal()>0){
-                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(1));
+                movimiento= new Movimiento(0, empleado, cajaCrud.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(1));
             }else{
-                movimiento= new Movimiento(0, empleado, caja.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(2));
+                movimiento= new Movimiento(0, empleado, cajaCrud.buscarPorId(1), venta.obtenerTotal(), operacion.buscarPorId(2));
             }
             movimiento.create(movimiento);
-            caja.setMonto(caja.buscarPorId(1).getMonto() + movimiento.getMonto());
-            caja.update(caja);
+            Caja caja = cajaCrud.buscarPorId(1);
+            caja.setMonto(caja.getMonto() + movimiento.getMonto());
+            cajaCrud.update(caja);
             
             generarComprobante(listaDetalleVenta, ventaAux);
             
@@ -380,8 +387,19 @@ public class FrmVenta extends javax.swing.JFrame {
         }
     }
 
-    private void quitarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void quitarProducto(int id) {
+        for (int i = 0; i < listaDetalleVenta.size(); i++) {
+            if (listaDetalleVenta.get(i).getProducto().getId() == id) {
+                listaDetalleVenta.remove(i);
+                break;
+            }
+        }
+        tblVentas.setModel(poblarTabla());
+        float subtotal = roundFloat((venta.obtenerTotal() * 0.82f), 2);
+        float igv = roundFloat((venta.obtenerTotal() * 0.18f), 2);
+        lblSubtotal.setText("S/ " + subtotal);
+        lblIgv.setText("S/ " + igv);
+        lblTotal.setText("S/ " + roundFloat(venta.obtenerTotal(), 2));
     }
 
     private void agregarProducto(KeyEvent evt) {

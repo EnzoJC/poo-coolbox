@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Cliente.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/DetalleVenta.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Empleado.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Producto.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Movimiento.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/database/Conexion.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/AsistenciaEmpleado.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Operacion.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Venta.java</file>
-            <file>file:/D:/DOCUMENTOS/NETBEANS/poo-coolbox/src/coolbox/model/Caja.java</file>
+            <file>file:/C:/Users/joaoe/Repositorios/Coolbox/src/coolbox/gui/FrmCajas.java</file>
+            <file>file:/C:/Users/joaoe/Repositorios/Coolbox/src/coolbox/gui/FrmProductos.java</file>
+            <file>file:/C:/Users/joaoe/Repositorios/Coolbox/src/coolbox/gui/FrmVenta.java</file>
+            <file>file:/C:/Users/joaoe/Repositorios/Coolbox/src/coolbox/gui/DialogCliente.java</file>
+            <file>file:/C:/Users/joaoe/Repositorios/Coolbox/src/coolbox/gui/FrmEmpleados.java</file>
         </group>
     </open-files>
 </project-private>

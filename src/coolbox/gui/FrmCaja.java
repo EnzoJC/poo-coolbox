@@ -2,6 +2,8 @@ package coolbox.gui;
 
 import coolbox.model.Caja;
 import coolbox.model.Movimiento;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ public class FrmCaja extends javax.swing.JFrame {
         for (Movimiento m : listaMovimientos) {
             monto += m.getMonto();
         }
-        lblMontoTotal.setText(cajaCrud.buscarPorId(1).getMonto() + monto + "");
+        lblMontoTotal.setText("S/ " + roundFloat(cajaCrud.buscarPorId(1).getMonto(), 2) + "");
     }
     
     @SuppressWarnings("unchecked")
@@ -120,5 +122,11 @@ public class FrmCaja extends javax.swing.JFrame {
             TablaModelo.addRow(datos);
         }
         return TablaModelo;
+    }
+    
+    private float roundFloat(float f, int places) {
+        BigDecimal bigDecimal = new BigDecimal(Float.toString(f));
+        bigDecimal = bigDecimal.setScale(places, RoundingMode.HALF_UP);
+        return bigDecimal.floatValue();
     }
 }
